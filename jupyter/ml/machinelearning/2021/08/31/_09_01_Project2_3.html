@@ -1,0 +1,5601 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Project2-3 | 안녕 세상!!</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Project2-3" />
+<meta name="author" content="channee" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="ML을 이용한 대출 채무이행 판별" />
+<meta property="og:description" content="ML을 이용한 대출 채무이행 판별" />
+<link rel="canonical" href="https://gwonchankim.github.io/channee/jupyter/ml/machinelearning/2021/08/31/_09_01_Project2_3.html" />
+<meta property="og:url" content="https://gwonchankim.github.io/channee/jupyter/ml/machinelearning/2021/08/31/_09_01_Project2_3.html" />
+<meta property="og:site_name" content="안녕 세상!!" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-08-31T00:00:00-05:00" />
+<script type="application/ld+json">
+{"datePublished":"2021-08-31T00:00:00-05:00","url":"https://gwonchankim.github.io/channee/jupyter/ml/machinelearning/2021/08/31/_09_01_Project2_3.html","@type":"BlogPosting","headline":"Project2-3","dateModified":"2021-08-31T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://gwonchankim.github.io/channee/jupyter/ml/machinelearning/2021/08/31/_09_01_Project2_3.html"},"author":{"@type":"Person","name":"channee"},"description":"ML을 이용한 대출 채무이행 판별","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/channee/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://gwonchankim.github.io/channee/feed.xml" title="안녕 세상!!" /><link rel="shortcut icon" type="image/x-icon" href="/channee/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/channee/">안녕 세상!!</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/channee/about/">About Me</a><a class="page-link" href="/channee/sample/">Sample</a><a class="page-link" href="/channee/search/">Search</a><a class="page-link" href="/channee/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Project2-3</h1><p class="page-description">ML을 이용한 대출 채무이행 판별</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-08-31T00:00:00-05:00" itemprop="datePublished">
+        Aug 31, 2021
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">channee</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      25 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/channee/categories/#jupyter">jupyter</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/channee/categories/#ML">ML</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/channee/categories/#MachineLearning">MachineLearning</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/Gwonchankim/channee/tree/master/_notebooks/2021_09_01_Project2_3.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/channee/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/Gwonchankim/channee/master?filepath=_notebooks%2F2021_09_01_Project2_3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/channee/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/Gwonchankim/channee/blob/master/_notebooks/2021_09_01_Project2_3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/channee/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h5"><a href="#pandas-groupby-단일-aggregation-함수-사용">pandas groupby 단일 aggregation 함수 사용 </a></li>
+<li class="toc-entry toc-h5"><a href="#groupby-agg()함수를-이용하여-여러개의-aggregation-함수-적용">groupby agg()함수를 이용하여 여러개의 aggregation 함수 적용 </a></li>
+<li class="toc-entry toc-h5"><a href="#agg()에-dictionary를-이용하여-groupby-적용">agg()에 dictionary를 이용하여 groupby 적용 </a></li>
+<li class="toc-entry toc-h5"><a href="#grouby-agg-로-만들어진--Multi-index-컬럼-변경.">grouby agg 로 만들어진  Multi index 컬럼 변경. </a></li>
+<li class="toc-entry toc-h5"><a href="#prev-피처-가공.-대출-신청액-대비-다른-금액-차이-및-비율-생성.">prev 피처 가공. 대출 신청액 대비 다른 금액 차이 및 비율 생성. </a></li>
+<li class="toc-entry toc-h5"><a href="#DAYS_XXX-피처의-365243-을-NULL로-변환하고,-첫번째-만기일과-마지막-만기일까지의-기간-가공">DAYS_XXX 피처의 365243 을 NULL로 변환하고, 첫번째 만기일과 마지막 만기일까지의 기간 가공 </a></li>
+<li class="toc-entry toc-h5"><a href="#기존-이자율-관련-컬럼이-null이-많아서-새롭게-간단한-이자율을-대출-금액과-대출-금액-납부-횟수를-기반으로-계산">기존 이자율 관련 컬럼이 null이 많아서 새롭게 간단한 이자율을 대출 금액과 대출 금액 납부 횟수를 기반으로 계산 </a></li>
+<li class="toc-entry toc-h5"><a href="#기존-대출-금액,-대출-상태-관련-피처들과-이들을-가공하여-만들어진-새로운-컬럼들로-aggregation-수행.">기존 대출 금액, 대출 상태 관련 피처들과 이들을 가공하여 만들어진 새로운 컬럼들로 aggregation 수행. </a></li>
+<li class="toc-entry toc-h4"><a href="#SK_ID_CURR별로-NAME_CONTRACT_STATUS가-Refused-일-경우의-건수-및-과거-대출건-대비-비율">SK_ID_CURR별로 NAME_CONTRACT_STATUS가 Refused 일 경우의 건수 및 과거 대출건 대비 비율 </a></li>
+<li class="toc-entry toc-h4"><a href="#Group-by-기준--컬럼-기반에서-다른-컬럼들의-기준에-따라-세분화된-aggregation-수행.">Group by 기준  컬럼 기반에서 다른 컬럼들의 기준에 따라 세분화된 aggregation 수행. </a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#Pandas는-원-DataFrame-에-groupby-적용된-DataFrame-과-세부기준으로-filtering-된-DataFrame에-groupby-적용된-DataFrame-을-조인하여-생성.">Pandas는 원 DataFrame 에 groupby 적용된 DataFrame 과 세부기준으로 filtering 된 DataFrame에 groupby 적용된 DataFrame 을 조인하여 생성. </a></li>
+<li class="toc-entry toc-h5"><a href="#계산된-PREV_REFUSED_COUNT-중-Null값은-0-으로-변경하고-SK_ID_CURR-개별-건수-대비-PREV_REFUSED_COUNT-비율-계산">계산된 PREV_REFUSED_COUNT 중 Null값은 0 으로 변경하고 SK_ID_CURR 개별 건수 대비 PREV_REFUSED_COUNT 비율 계산 </a></li>
+<li class="toc-entry toc-h5"><a href="#컬럼명-변경,-Null-처리,-그리고-기존의-prev_amt_agg와-조인-후-데이터-가공">컬럼명 변경, Null 처리, 그리고 기존의 prev_amt_agg와 조인 후 데이터 가공 </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h4"><a href="#가공된-최종-데이터-세트-생성">가공된 최종 데이터 세트 생성 </a>
+<ul>
+<li class="toc-entry toc-h5"><a href="#지금까지-과정을-함수화">지금까지 과정을 함수화 </a></li>
+<li class="toc-entry toc-h5"><a href="#이전에-application-데이터-세트의-feature-engineering-수행-후-새롭게-previous-데이터-세트로-가공된-데이터를-조인.">이전에 application 데이터 세트의 feature engineering 수행 후 새롭게 previous 데이터 세트로 가공된 데이터를 조인. </a></li>
+</ul>
+</li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021_09_01_Project2_3.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="pandas-groupby-단일-aggregation-함수-사용">
+<a class="anchor" href="#pandas-groupby-%EB%8B%A8%EC%9D%BC-aggregation-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>pandas groupby 단일 aggregation 함수 사용<a class="anchor-link" href="#pandas-groupby-%EB%8B%A8%EC%9D%BC-aggregation-%ED%95%A8%EC%88%98-%EC%82%AC%EC%9A%A9"> </a>
+</h5>
+<ul>
+<li>groupby SK_ID_CURR</li>
+<li>SK_ID_CURR별 건수, AMT_CREDIT에 대한 평균, 최대 값</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SK_ID_CURR'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;pandas.core.groupby.generic.DataFrameGroupBy object at 0x0000027305E02EB0&gt;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_group</span><span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SK_ID_CURR'</span><span class="p">)</span>
+
+<span class="c1"># DataFrameGroupby 객체에 aggregation함수 수행 결과를 저장한 DataFrame 생성 및 aggregation값 저장. </span>
+<span class="n">prev_agg</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">prev_agg</span><span class="p">[</span><span class="s1">'CNT'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_group</span><span class="p">[</span><span class="s1">'SK_ID_CURR'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="n">prev_agg</span><span class="p">[</span><span class="s1">'AVG_CREDIT'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_group</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">prev_agg</span><span class="p">[</span><span class="s1">'MAX_CREDIT'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_group</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+
+<span class="c1"># groupby 컬럼값이 DataFrame의 Index가 됨. 컬럼으로 변환하려면 reset_index()로 변환 필요. </span>
+<span class="n">prev_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>CNT</th>
+      <th>AVG_CREDIT</th>
+      <th>MAX_CREDIT</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1</td>
+      <td>23787.000000</td>
+      <td>23787.0</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3</td>
+      <td>484191.000000</td>
+      <td>1035882.0</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1</td>
+      <td>20106.000000</td>
+      <td>20106.0</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>2</td>
+      <td>20076.750000</td>
+      <td>40153.5</td>
+    </tr>
+    <tr>
+      <th>100006</th>
+      <td>9</td>
+      <td>291695.500000</td>
+      <td>906615.0</td>
+    </tr>
+    <tr>
+      <th>100007</th>
+      <td>6</td>
+      <td>166638.750000</td>
+      <td>284400.0</td>
+    </tr>
+    <tr>
+      <th>100008</th>
+      <td>5</td>
+      <td>162767.700000</td>
+      <td>501975.0</td>
+    </tr>
+    <tr>
+      <th>100009</th>
+      <td>7</td>
+      <td>70137.642857</td>
+      <td>98239.5</td>
+    </tr>
+    <tr>
+      <th>100010</th>
+      <td>1</td>
+      <td>260811.000000</td>
+      <td>260811.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="groupby-agg()함수를-이용하여-여러개의-aggregation-함수-적용">
+<a class="anchor" href="#groupby-agg()%ED%95%A8%EC%88%98%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%97%AC%EB%9F%AC%EA%B0%9C%EC%9D%98-aggregation-%ED%95%A8%EC%88%98-%EC%A0%81%EC%9A%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>groupby agg()함수를 이용하여 여러개의 aggregation 함수 적용<a class="anchor-link" href="#groupby-agg()%ED%95%A8%EC%88%98%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-%EC%97%AC%EB%9F%AC%EA%B0%9C%EC%9D%98-aggregation-%ED%95%A8%EC%88%98-%EC%A0%81%EC%9A%A9"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_group</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SK_ID_CURR'</span><span class="p">)</span>
+
+<span class="c1"># DataFrameGroupby의 agg() 함수를 이용하여 여러개의 aggregation 함수 적용</span>
+<span class="n">prev_agg1</span> <span class="o">=</span> <span class="n">prev_group</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">])</span>
+<span class="n">prev_agg2</span> <span class="o">=</span> <span class="n">prev_group</span><span class="p">[</span><span class="s1">'AMT_ANNUITY'</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">])</span>
+<span class="c1"># merge를 이용하여 두개의 DataFrame 결합. </span>
+<span class="n">prev_agg</span> <span class="o">=</span> <span class="n">prev_agg1</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">prev_agg2</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'SK_ID_CURR'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">)</span>
+<span class="n">prev_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean_x</th>
+      <th>max_x</th>
+      <th>sum_x</th>
+      <th>mean_y</th>
+      <th>max_y</th>
+      <th>sum_y</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>23787.000000</td>
+      <td>23787.0</td>
+      <td>23787.0</td>
+      <td>3951.000000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>9251.775000</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>484191.000000</td>
+      <td>1035882.0</td>
+      <td>1452573.0</td>
+      <td>56553.990000</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>20106.000000</td>
+      <td>20106.0</td>
+      <td>20106.0</td>
+      <td>5357.250000</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>20076.750000</td>
+      <td>40153.5</td>
+      <td>40153.5</td>
+      <td>4813.200000</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+    </tr>
+    <tr>
+      <th>100006</th>
+      <td>291695.500000</td>
+      <td>906615.0</td>
+      <td>2625259.5</td>
+      <td>23651.175000</td>
+      <td>39954.510</td>
+      <td>141907.050</td>
+    </tr>
+    <tr>
+      <th>100007</th>
+      <td>166638.750000</td>
+      <td>284400.0</td>
+      <td>999832.5</td>
+      <td>12278.805000</td>
+      <td>22678.785</td>
+      <td>73672.830</td>
+    </tr>
+    <tr>
+      <th>100008</th>
+      <td>162767.700000</td>
+      <td>501975.0</td>
+      <td>813838.5</td>
+      <td>15839.696250</td>
+      <td>25309.575</td>
+      <td>63358.785</td>
+    </tr>
+    <tr>
+      <th>100009</th>
+      <td>70137.642857</td>
+      <td>98239.5</td>
+      <td>490963.5</td>
+      <td>10051.412143</td>
+      <td>17341.605</td>
+      <td>70359.885</td>
+    </tr>
+    <tr>
+      <th>100010</th>
+      <td>260811.000000</td>
+      <td>260811.0</td>
+      <td>260811.0</td>
+      <td>27463.410000</td>
+      <td>27463.410</td>
+      <td>27463.410</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="agg()에-dictionary를-이용하여-groupby-적용">
+<a class="anchor" href="#agg()%EC%97%90-dictionary%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-groupby-%EC%A0%81%EC%9A%A9" aria-hidden="true"><span class="octicon octicon-link"></span></a>agg()에 dictionary를 이용하여 groupby 적용<a class="anchor-link" href="#agg()%EC%97%90-dictionary%EB%A5%BC-%EC%9D%B4%EC%9A%A9%ED%95%98%EC%97%AC-groupby-%EC%A0%81%EC%9A%A9"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agg_dict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">'SK_ID_CURR'</span><span class="p">:[</span><span class="s1">'count'</span><span class="p">],</span>
+    <span class="s1">'AMT_CREDIT'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_ANNUITY'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span> 
+    <span class="s1">'AMT_APPLICATION'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_DOWN_PAYMENT'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_GOODS_PRICE'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">prev_group</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SK_ID_CURR'</span><span class="p">)</span>
+<span class="n">prev_amt_agg</span> <span class="o">=</span> <span class="n">prev_group</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">agg_dict</span><span class="p">)</span>
+<span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead tr th {
+        text-align: left;
+    }
+
+    .dataframe thead tr:last-of-type th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr>
+      <th></th>
+      <th>SK_ID_CURR</th>
+      <th colspan="3" halign="left">AMT_CREDIT</th>
+      <th colspan="3" halign="left">AMT_ANNUITY</th>
+      <th colspan="3" halign="left">AMT_APPLICATION</th>
+      <th colspan="3" halign="left">AMT_DOWN_PAYMENT</th>
+      <th colspan="3" halign="left">AMT_GOODS_PRICE</th>
+    </tr>
+    <tr>
+      <th></th>
+      <th>count</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>sum</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>sum</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>sum</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>sum</th>
+      <th>mean</th>
+      <th>max</th>
+      <th>sum</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1</td>
+      <td>23787.00</td>
+      <td>23787.0</td>
+      <td>23787.0</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.50</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3</td>
+      <td>484191.00</td>
+      <td>1035882.0</td>
+      <td>1452573.0</td>
+      <td>56553.990</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.50</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>3442.5</td>
+      <td>6885.0</td>
+      <td>6885.0</td>
+      <td>435436.5</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1</td>
+      <td>20106.00</td>
+      <td>20106.0</td>
+      <td>20106.0</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.00</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>2</td>
+      <td>20076.75</td>
+      <td>40153.5</td>
+      <td>40153.5</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.75</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="grouby-agg-로-만들어진--Multi-index-컬럼-변경.">
+<a class="anchor" href="#grouby-agg-%EB%A1%9C-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A7%84--Multi-index-%EC%BB%AC%EB%9F%BC-%EB%B3%80%EA%B2%BD." aria-hidden="true"><span class="octicon octicon-link"></span></a>grouby agg 로 만들어진  Multi index 컬럼 변경.<a class="anchor-link" href="#grouby-agg-%EB%A1%9C-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A7%84--Multi-index-%EC%BB%AC%EB%9F%BC-%EB%B3%80%EA%B2%BD."> </a>
+</h5>
+<ul>
+<li>MultiIndex로 되어 있는 컬럼명 확인</li>
+<li>MultiIndex 컬럼명을 _로 연결하여 컬럼명 변경. </li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">columns</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>MultiIndex([(      'SK_ID_CURR', 'count'),
+            (      'AMT_CREDIT',  'mean'),
+            (      'AMT_CREDIT',   'max'),
+            (      'AMT_CREDIT',   'sum'),
+            (     'AMT_ANNUITY',  'mean'),
+            (     'AMT_ANNUITY',   'max'),
+            (     'AMT_ANNUITY',   'sum'),
+            ( 'AMT_APPLICATION',  'mean'),
+            ( 'AMT_APPLICATION',   'max'),
+            ( 'AMT_APPLICATION',   'sum'),
+            ('AMT_DOWN_PAYMENT',  'mean'),
+            ('AMT_DOWN_PAYMENT',   'max'),
+            ('AMT_DOWN_PAYMENT',   'sum'),
+            ( 'AMT_GOODS_PRICE',  'mean'),
+            ( 'AMT_GOODS_PRICE',   'max'),
+            ( 'AMT_GOODS_PRICE',   'sum')],
+           )</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PREV_"</span><span class="o">+</span><span class="s2">"_"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PREV_SK_ID_CURR_COUNT</th>
+      <th>PREV_AMT_CREDIT_MEAN</th>
+      <th>PREV_AMT_CREDIT_MAX</th>
+      <th>PREV_AMT_CREDIT_SUM</th>
+      <th>PREV_AMT_ANNUITY_MEAN</th>
+      <th>PREV_AMT_ANNUITY_MAX</th>
+      <th>PREV_AMT_ANNUITY_SUM</th>
+      <th>PREV_AMT_APPLICATION_MEAN</th>
+      <th>PREV_AMT_APPLICATION_MAX</th>
+      <th>PREV_AMT_APPLICATION_SUM</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MAX</th>
+      <th>PREV_AMT_DOWN_PAYMENT_SUM</th>
+      <th>PREV_AMT_GOODS_PRICE_MEAN</th>
+      <th>PREV_AMT_GOODS_PRICE_MAX</th>
+      <th>PREV_AMT_GOODS_PRICE_SUM</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1</td>
+      <td>23787.00</td>
+      <td>23787.0</td>
+      <td>23787.0</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.50</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3</td>
+      <td>484191.00</td>
+      <td>1035882.0</td>
+      <td>1452573.0</td>
+      <td>56553.990</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.50</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>3442.5</td>
+      <td>6885.0</td>
+      <td>6885.0</td>
+      <td>435436.5</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1</td>
+      <td>20106.00</td>
+      <td>20106.0</td>
+      <td>20106.0</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.00</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>2</td>
+      <td>20076.75</td>
+      <td>40153.5</td>
+      <td>40153.5</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.75</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="prev-피처-가공.-대출-신청액-대비-다른-금액-차이-및-비율-생성.">
+<a class="anchor" href="#prev-%ED%94%BC%EC%B2%98-%EA%B0%80%EA%B3%B5.-%EB%8C%80%EC%B6%9C-%EC%8B%A0%EC%B2%AD%EC%95%A1-%EB%8C%80%EB%B9%84-%EB%8B%A4%EB%A5%B8-%EA%B8%88%EC%95%A1-%EC%B0%A8%EC%9D%B4-%EB%B0%8F-%EB%B9%84%EC%9C%A8-%EC%83%9D%EC%84%B1." aria-hidden="true"><span class="octicon octicon-link"></span></a>prev 피처 가공. 대출 신청액 대비 다른 금액 차이 및 비율 생성.<a class="anchor-link" href="#prev-%ED%94%BC%EC%B2%98-%EA%B0%80%EA%B3%B5.-%EB%8C%80%EC%B6%9C-%EC%8B%A0%EC%B2%AD%EC%95%A1-%EB%8C%80%EB%B9%84-%EB%8B%A4%EB%A5%B8-%EA%B8%88%EC%95%A1-%EC%B0%A8%EC%9D%B4-%EB%B0%8F-%EB%B9%84%EC%9C%A8-%EC%83%9D%EC%84%B1."> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_CREDIT_DIFF'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_APPLICATION'</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_GOODS_DIFF'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_APPLICATION'</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_GOODS_PRICE'</span><span class="p">]</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_CREDIT_APPL_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span><span class="o">/</span><span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_APPLICATION'</span><span class="p">]</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_ANNUITY_APPL_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_ANNUITY'</span><span class="p">]</span><span class="o">/</span><span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_APPLICATION'</span><span class="p">]</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_GOODS_APPL_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_GOODS_PRICE'</span><span class="p">]</span><span class="o">/</span><span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_APPLICATION'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="DAYS_XXX-피처의-365243-을-NULL로-변환하고,-첫번째-만기일과-마지막-만기일까지의-기간-가공">
+<a class="anchor" href="#DAYS_XXX-%ED%94%BC%EC%B2%98%EC%9D%98-365243-%EC%9D%84-NULL%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B3%A0,-%EC%B2%AB%EB%B2%88%EC%A7%B8-%EB%A7%8C%EA%B8%B0%EC%9D%BC%EA%B3%BC-%EB%A7%88%EC%A7%80%EB%A7%89-%EB%A7%8C%EA%B8%B0%EC%9D%BC%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B8%B0%EA%B0%84-%EA%B0%80%EA%B3%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>DAYS_XXX 피처의 365243 을 NULL로 변환하고, 첫번째 만기일과 마지막 만기일까지의 기간 가공<a class="anchor-link" href="#DAYS_XXX-%ED%94%BC%EC%B2%98%EC%9D%98-365243-%EC%9D%84-NULL%EB%A1%9C-%EB%B3%80%ED%99%98%ED%95%98%EA%B3%A0,-%EC%B2%AB%EB%B2%88%EC%A7%B8-%EB%A7%8C%EA%B8%B0%EC%9D%BC%EA%B3%BC-%EB%A7%88%EC%A7%80%EB%A7%89-%EB%A7%8C%EA%B8%B0%EC%9D%BC%EA%B9%8C%EC%A7%80%EC%9D%98-%EA%B8%B0%EA%B0%84-%EA%B0%80%EA%B3%B5"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_FIRST_DRAWING'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">365243</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_FIRST_DUE'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">365243</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_LAST_DUE_1ST_VERSION'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">365243</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_LAST_DUE'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">365243</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_TERMINATION'</span><span class="p">]</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="mi">365243</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="c1"># 첫번째 만기일과 마지막 만기일까지의 기간</span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_DAYS_LAST_DUE_DIFF'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_LAST_DUE_1ST_VERSION'</span><span class="p">]</span> <span class="o">-</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'DAYS_LAST_DUE'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="기존-이자율-관련-컬럼이-null이-많아서-새롭게-간단한-이자율을-대출-금액과-대출-금액-납부-횟수를-기반으로-계산">
+<a class="anchor" href="#%EA%B8%B0%EC%A1%B4-%EC%9D%B4%EC%9E%90%EC%9C%A8-%EA%B4%80%EB%A0%A8-%EC%BB%AC%EB%9F%BC%EC%9D%B4-null%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%84%9C-%EC%83%88%EB%A1%AD%EA%B2%8C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%9D%B4%EC%9E%90%EC%9C%A8%EC%9D%84-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1%EA%B3%BC-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1-%EB%82%A9%EB%B6%80-%ED%9A%9F%EC%88%98%EB%A5%BC-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EA%B3%84%EC%82%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>기존 이자율 관련 컬럼이 null이 많아서 새롭게 간단한 이자율을 대출 금액과 대출 금액 납부 횟수를 기반으로 계산<a class="anchor-link" href="#%EA%B8%B0%EC%A1%B4-%EC%9D%B4%EC%9E%90%EC%9C%A8-%EA%B4%80%EB%A0%A8-%EC%BB%AC%EB%9F%BC%EC%9D%B4-null%EC%9D%B4-%EB%A7%8E%EC%95%84%EC%84%9C-%EC%83%88%EB%A1%AD%EA%B2%8C-%EA%B0%84%EB%8B%A8%ED%95%9C-%EC%9D%B4%EC%9E%90%EC%9C%A8%EC%9D%84-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1%EA%B3%BC-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1-%EB%82%A9%EB%B6%80-%ED%9A%9F%EC%88%98%EB%A5%BC-%EA%B8%B0%EB%B0%98%EC%9C%BC%EB%A1%9C-%EA%B3%84%EC%82%B0"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">all_pay</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_ANNUITY'</span><span class="p">]</span> <span class="o">*</span> <span class="n">prev</span><span class="p">[</span><span class="s1">'CNT_PAYMENT'</span><span class="p">]</span>
+<span class="c1"># 전체 납부 금액 대비 AMT_CREDIT 비율을 구하고 여기에 다시 납부횟수로 나누어서 이자율 계산. </span>
+<span class="n">prev</span><span class="p">[</span><span class="s1">'PREV_INTERESTS_RATE'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">all_pay</span><span class="o">/</span><span class="n">prev</span><span class="p">[</span><span class="s1">'AMT_CREDIT'</span><span class="p">]</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">prev</span><span class="p">[</span><span class="s1">'CNT_PAYMENT'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">7</span><span class="p">:]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PREV_CREDIT_DIFF</th>
+      <th>PREV_GOODS_DIFF</th>
+      <th>PREV_CREDIT_APPL_RATIO</th>
+      <th>PREV_ANNUITY_APPL_RATIO</th>
+      <th>PREV_GOODS_APPL_RATIO</th>
+      <th>PREV_DAYS_LAST_DUE_DIFF</th>
+      <th>PREV_INTERESTS_RATE</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>0.100929</td>
+      <td>1.0</td>
+      <td>342.0</td>
+      <td>0.017596</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-72171.0</td>
+      <td>0.0</td>
+      <td>1.118800</td>
+      <td>0.041463</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>0.009282</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>-23944.5</td>
+      <td>0.0</td>
+      <td>1.212840</td>
+      <td>0.133873</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>0.027047</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>-20790.0</td>
+      <td>0.0</td>
+      <td>1.046200</td>
+      <td>0.104536</td>
+      <td>1.0</td>
+      <td>30.0</td>
+      <td>0.016587</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>-66555.0</td>
+      <td>0.0</td>
+      <td>1.197200</td>
+      <td>0.094591</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>0.037343</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>-25573.5</td>
+      <td>0.0</td>
+      <td>1.081186</td>
+      <td>0.075251</td>
+      <td>1.0</td>
+      <td>0.0</td>
+      <td>0.014044</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>0.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="기존-대출-금액,-대출-상태-관련-피처들과-이들을-가공하여-만들어진-새로운-컬럼들로-aggregation-수행.">
+<a class="anchor" href="#%EA%B8%B0%EC%A1%B4-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1,-%EB%8C%80%EC%B6%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A0%A8-%ED%94%BC%EC%B2%98%EB%93%A4%EA%B3%BC-%EC%9D%B4%EB%93%A4%EC%9D%84-%EA%B0%80%EA%B3%B5%ED%95%98%EC%97%AC-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A7%84-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%BB%AC%EB%9F%BC%EB%93%A4%EB%A1%9C-aggregation-%EC%88%98%ED%96%89." aria-hidden="true"><span class="octicon octicon-link"></span></a>기존 대출 금액, 대출 상태 관련 피처들과 이들을 가공하여 만들어진 새로운 컬럼들로 aggregation 수행.<a class="anchor-link" href="#%EA%B8%B0%EC%A1%B4-%EB%8C%80%EC%B6%9C-%EA%B8%88%EC%95%A1,-%EB%8C%80%EC%B6%9C-%EC%83%81%ED%83%9C-%EA%B4%80%EB%A0%A8-%ED%94%BC%EC%B2%98%EB%93%A4%EA%B3%BC-%EC%9D%B4%EB%93%A4%EC%9D%84-%EA%B0%80%EA%B3%B5%ED%95%98%EC%97%AC-%EB%A7%8C%EB%93%A4%EC%96%B4%EC%A7%84-%EC%83%88%EB%A1%9C%EC%9A%B4-%EC%BB%AC%EB%9F%BC%EB%93%A4%EB%A1%9C-aggregation-%EC%88%98%ED%96%89."> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">agg_dict</span> <span class="o">=</span> <span class="p">{</span>
+     <span class="c1"># 기존 컬럼. </span>
+    <span class="s1">'SK_ID_CURR'</span><span class="p">:[</span><span class="s1">'count'</span><span class="p">],</span>
+    <span class="s1">'AMT_CREDIT'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_ANNUITY'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span> 
+    <span class="s1">'AMT_APPLICATION'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_DOWN_PAYMENT'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'AMT_GOODS_PRICE'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'RATE_DOWN_PAYMENT'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'min'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">],</span>
+    <span class="s1">'DAYS_DECISION'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'min'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'mean'</span><span class="p">],</span>
+    <span class="s1">'CNT_PAYMENT'</span><span class="p">:</span> <span class="p">[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="c1"># 가공 컬럼</span>
+    <span class="s1">'PREV_CREDIT_DIFF'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span> 
+    <span class="s1">'PREV_CREDIT_APPL_RATIO'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">],</span>
+    <span class="s1">'PREV_GOODS_DIFF'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'PREV_GOODS_APPL_RATIO'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">],</span>
+    <span class="s1">'PREV_DAYS_LAST_DUE_DIFF'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">,</span> <span class="s1">'sum'</span><span class="p">],</span>
+    <span class="s1">'PREV_INTERESTS_RATE'</span><span class="p">:[</span><span class="s1">'mean'</span><span class="p">,</span> <span class="s1">'max'</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="n">prev_group</span> <span class="o">=</span> <span class="n">prev</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SK_ID_CURR'</span><span class="p">)</span>
+<span class="n">prev_amt_agg</span> <span class="o">=</span> <span class="n">prev_group</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span><span class="n">agg_dict</span><span class="p">)</span>
+
+<span class="c1"># multi index 컬럼을 '_'로 연결하여 컬럼명 변경</span>
+<span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"PREV_"</span><span class="o">+</span> <span class="s2">"_"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">ravel</span><span class="p">()]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PREV_SK_ID_CURR_COUNT</th>
+      <th>PREV_AMT_CREDIT_MEAN</th>
+      <th>PREV_AMT_CREDIT_MAX</th>
+      <th>PREV_AMT_CREDIT_SUM</th>
+      <th>PREV_AMT_ANNUITY_MEAN</th>
+      <th>PREV_AMT_ANNUITY_MAX</th>
+      <th>PREV_AMT_ANNUITY_SUM</th>
+      <th>PREV_AMT_APPLICATION_MEAN</th>
+      <th>PREV_AMT_APPLICATION_MAX</th>
+      <th>PREV_AMT_APPLICATION_SUM</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MAX</th>
+      <th>PREV_AMT_DOWN_PAYMENT_SUM</th>
+      <th>PREV_AMT_GOODS_PRICE_MEAN</th>
+      <th>PREV_AMT_GOODS_PRICE_MAX</th>
+      <th>PREV_AMT_GOODS_PRICE_SUM</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MIN</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MAX</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_DAYS_DECISION_MIN</th>
+      <th>PREV_DAYS_DECISION_MAX</th>
+      <th>PREV_DAYS_DECISION_MEAN</th>
+      <th>PREV_CNT_PAYMENT_MEAN</th>
+      <th>PREV_CNT_PAYMENT_SUM</th>
+      <th>PREV_PREV_CREDIT_DIFF_MEAN</th>
+      <th>PREV_PREV_CREDIT_DIFF_MAX</th>
+      <th>PREV_PREV_CREDIT_DIFF_SUM</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_MEAN</th>
+      <th>PREV_PREV_GOODS_DIFF_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_SUM</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MEAN</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_SUM</th>
+      <th>PREV_PREV_INTERESTS_RATE_MEAN</th>
+      <th>PREV_PREV_INTERESTS_RATE_MAX</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1</td>
+      <td>23787.00</td>
+      <td>23787.0</td>
+      <td>23787.0</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.50</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>-1740</td>
+      <td>-1740</td>
+      <td>-1740.0</td>
+      <td>8.0</td>
+      <td>8.0</td>
+      <td>1048.5</td>
+      <td>1048.5</td>
+      <td>1048.5</td>
+      <td>0.957782</td>
+      <td>0.957782</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>0.041099</td>
+      <td>0.041099</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-606</td>
+      <td>-606</td>
+      <td>-606.0</td>
+      <td>24.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.010003</td>
+      <td>0.010003</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3</td>
+      <td>484191.00</td>
+      <td>1035882.0</td>
+      <td>1452573.0</td>
+      <td>56553.990</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.50</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>3442.5</td>
+      <td>6885.0</td>
+      <td>6885.0</td>
+      <td>435436.5</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>0.000000</td>
+      <td>0.100061</td>
+      <td>0.050030</td>
+      <td>-2341</td>
+      <td>-746</td>
+      <td>-1305.0</td>
+      <td>10.0</td>
+      <td>30.0</td>
+      <td>-48754.5</td>
+      <td>756.0</td>
+      <td>-146263.5</td>
+      <td>1.057664</td>
+      <td>1.150980</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>50.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.015272</td>
+      <td>0.018533</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1</td>
+      <td>20106.00</td>
+      <td>20106.0</td>
+      <td>20106.0</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.00</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>-815</td>
+      <td>-815</td>
+      <td>-815.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>4176.0</td>
+      <td>4176.0</td>
+      <td>4176.0</td>
+      <td>0.828021</td>
+      <td>0.828021</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.016450</td>
+      <td>0.016450</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>2</td>
+      <td>20076.75</td>
+      <td>40153.5</td>
+      <td>40153.5</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.75</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>-757</td>
+      <td>-315</td>
+      <td>-536.0</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>2232.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>0.899950</td>
+      <td>0.899950</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>0.036537</td>
+      <td>0.036537</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="SK_ID_CURR별로-NAME_CONTRACT_STATUS가-Refused-일-경우의-건수-및-과거-대출건-대비-비율">
+<a class="anchor" href="#SK_ID_CURR%EB%B3%84%EB%A1%9C-NAME_CONTRACT_STATUS%EA%B0%80-Refused-%EC%9D%BC-%EA%B2%BD%EC%9A%B0%EC%9D%98-%EA%B1%B4%EC%88%98-%EB%B0%8F-%EA%B3%BC%EA%B1%B0-%EB%8C%80%EC%B6%9C%EA%B1%B4-%EB%8C%80%EB%B9%84-%EB%B9%84%EC%9C%A8" aria-hidden="true"><span class="octicon octicon-link"></span></a>SK_ID_CURR별로 NAME_CONTRACT_STATUS가 Refused 일 경우의 건수 및 과거 대출건 대비 비율<a class="anchor-link" href="#SK_ID_CURR%EB%B3%84%EB%A1%9C-NAME_CONTRACT_STATUS%EA%B0%80-Refused-%EC%9D%BC-%EA%B2%BD%EC%9A%B0%EC%9D%98-%EA%B1%B4%EC%88%98-%EB%B0%8F-%EA%B3%BC%EA%B1%B0-%EB%8C%80%EC%B6%9C%EA%B1%B4-%EB%8C%80%EB%B9%84-%EB%B9%84%EC%9C%A8"> </a>
+</h4>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Group-by-기준--컬럼-기반에서-다른-컬럼들의-기준에-따라-세분화된-aggregation-수행.">
+<a class="anchor" href="#Group-by-%EA%B8%B0%EC%A4%80--%EC%BB%AC%EB%9F%BC-%EA%B8%B0%EB%B0%98%EC%97%90%EC%84%9C-%EB%8B%A4%EB%A5%B8-%EC%BB%AC%EB%9F%BC%EB%93%A4%EC%9D%98-%EA%B8%B0%EC%A4%80%EC%97%90-%EB%94%B0%EB%9D%BC-%EC%84%B8%EB%B6%84%ED%99%94%EB%90%9C-aggregation-%EC%88%98%ED%96%89." aria-hidden="true"><span class="octicon octicon-link"></span></a>Group by 기준  컬럼 기반에서 다른 컬럼들의 기준에 따라 세분화된 aggregation 수행.<a class="anchor-link" href="#Group-by-%EA%B8%B0%EC%A4%80--%EC%BB%AC%EB%9F%BC-%EA%B8%B0%EB%B0%98%EC%97%90%EC%84%9C-%EB%8B%A4%EB%A5%B8-%EC%BB%AC%EB%9F%BC%EB%93%A4%EC%9D%98-%EA%B8%B0%EC%A4%80%EC%97%90-%EB%94%B0%EB%9D%BC-%EC%84%B8%EB%B6%84%ED%99%94%EB%90%9C-aggregation-%EC%88%98%ED%96%89."> </a>
+</h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev</span><span class="p">[</span><span class="s1">'NAME_CONTRACT_STATUS'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>Approved        1036781
+Canceled         316319
+Refused          290678
+Unused offer      26436
+Name: NAME_CONTRACT_STATUS, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="Pandas는-원-DataFrame-에-groupby-적용된-DataFrame-과-세부기준으로-filtering-된-DataFrame에-groupby-적용된-DataFrame-을-조인하여-생성.">
+<a class="anchor" href="#Pandas%EB%8A%94-%EC%9B%90-DataFrame-%EC%97%90-groupby-%EC%A0%81%EC%9A%A9%EB%90%9C-DataFrame-%EA%B3%BC-%EC%84%B8%EB%B6%80%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-filtering-%EB%90%9C-DataFrame%EC%97%90-groupby-%EC%A0%81%EC%9A%A9%EB%90%9C-DataFrame-%EC%9D%84-%EC%A1%B0%EC%9D%B8%ED%95%98%EC%97%AC-%EC%83%9D%EC%84%B1." aria-hidden="true"><span class="octicon octicon-link"></span></a>Pandas는 원 DataFrame 에 groupby 적용된 DataFrame 과 세부기준으로 filtering 된 DataFrame에 groupby 적용된 DataFrame 을 조인하여 생성.<a class="anchor-link" href="#Pandas%EB%8A%94-%EC%9B%90-DataFrame-%EC%97%90-groupby-%EC%A0%81%EC%9A%A9%EB%90%9C-DataFrame-%EA%B3%BC-%EC%84%B8%EB%B6%80%EA%B8%B0%EC%A4%80%EC%9C%BC%EB%A1%9C-filtering-%EB%90%9C-DataFrame%EC%97%90-groupby-%EC%A0%81%EC%9A%A9%EB%90%9C-DataFrame-%EC%9D%84-%EC%A1%B0%EC%9D%B8%ED%95%98%EC%97%AC-%EC%83%9D%EC%84%B1."> </a>
+</h5>
+<ul>
+<li>NAME_CONTRACT_STATUS == 'Refused' 세부 기준으로 filtering 및 filtering 된 DataFrame에 groupby 적용 </li>
+<li>groupby 완료 후 기존 prev_amt_agg와 조인</li>
+<li>효율적인 오류 방지를 위해서 groupby 시 적용후 groupby key값을 DataFrame의 Index가 아닌 일반 컬럼으로 변경.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cond_refused</span> <span class="o">=</span> <span class="p">(</span><span class="n">prev</span><span class="p">[</span><span class="s1">'NAME_CONTRACT_STATUS'</span><span class="p">]</span> <span class="o">==</span> <span class="s1">'Refused'</span><span class="p">)</span>
+<span class="n">prev_refused</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">cond_refused</span><span class="p">]</span>
+<span class="n">prev_refused</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">prev</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>((290678, 44), (1670214, 44))</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_refused_agg</span> <span class="o">=</span> <span class="n">prev_refused</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'SK_ID_CURR'</span><span class="p">])[</span><span class="s1">'SK_ID_CURR'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">prev_refused_agg</span> <span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+<span class="n">prev_refused_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>(338857, 39) (118277,)
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>SK_ID_CURR
+100006     1
+100011     1
+100027     1
+100030    10
+100035     8
+100036     3
+100037     2
+100043     5
+100046     1
+100047     2
+Name: SK_ID_CURR, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Series와 DataFrame 조인 시 Series를 DataFrame으로 내부 변환하는데 조인 시 Index명과 컬럼명이 서로 충돌하여 오류. </span>
+<span class="c1"># prev_amt_refused_agg = prev_amt_agg.merge(prev_refused_agg, on='SK_ID_CURR', how='left')</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">prev_refused_agg</span><span class="p">)</span>
+
+<span class="c1"># 일반적으로 groupby key를 INDEX로 하는 것보다 일반 컬럼으로 하는 것이 여러가지 오류 예방에 효율적. </span>
+<span class="n">prev_refused_agg</span> <span class="o">=</span> <span class="n">prev_refused_agg</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">)</span>
+<span class="n">prev_amt_agg</span> <span class="o">=</span> <span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="n">prev_amt_refused_agg</span> <span class="o">=</span> <span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">prev_refused_agg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'SK_ID_CURR'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+<span class="n">prev_amt_refused_agg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SK_ID_CURR</th>
+      <th>PREV_SK_ID_CURR_COUNT</th>
+      <th>PREV_AMT_CREDIT_MEAN</th>
+      <th>PREV_AMT_CREDIT_MAX</th>
+      <th>PREV_AMT_CREDIT_SUM</th>
+      <th>PREV_AMT_ANNUITY_MEAN</th>
+      <th>PREV_AMT_ANNUITY_MAX</th>
+      <th>PREV_AMT_ANNUITY_SUM</th>
+      <th>PREV_AMT_APPLICATION_MEAN</th>
+      <th>PREV_AMT_APPLICATION_MAX</th>
+      <th>PREV_AMT_APPLICATION_SUM</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MAX</th>
+      <th>PREV_AMT_DOWN_PAYMENT_SUM</th>
+      <th>PREV_AMT_GOODS_PRICE_MEAN</th>
+      <th>PREV_AMT_GOODS_PRICE_MAX</th>
+      <th>PREV_AMT_GOODS_PRICE_SUM</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MIN</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MAX</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_DAYS_DECISION_MIN</th>
+      <th>PREV_DAYS_DECISION_MAX</th>
+      <th>PREV_DAYS_DECISION_MEAN</th>
+      <th>PREV_CNT_PAYMENT_MEAN</th>
+      <th>PREV_CNT_PAYMENT_SUM</th>
+      <th>PREV_PREV_CREDIT_DIFF_MEAN</th>
+      <th>PREV_PREV_CREDIT_DIFF_MAX</th>
+      <th>PREV_PREV_CREDIT_DIFF_SUM</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_MEAN</th>
+      <th>PREV_PREV_GOODS_DIFF_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_SUM</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MEAN</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_SUM</th>
+      <th>PREV_PREV_INTERESTS_RATE_MEAN</th>
+      <th>PREV_PREV_INTERESTS_RATE_MAX</th>
+      <th>PREV_REFUSED_COUNT</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100001</td>
+      <td>1</td>
+      <td>23787.00</td>
+      <td>23787.0</td>
+      <td>23787.0</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.50</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>2520.0</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>24835.5</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>-1740</td>
+      <td>-1740</td>
+      <td>-1740.0</td>
+      <td>8.0</td>
+      <td>8.0</td>
+      <td>1048.5</td>
+      <td>1048.5</td>
+      <td>1048.5</td>
+      <td>0.957782</td>
+      <td>0.957782</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>0.041099</td>
+      <td>0.041099</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100002</td>
+      <td>1</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.00</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>179055.0</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-606</td>
+      <td>-606</td>
+      <td>-606.0</td>
+      <td>24.0</td>
+      <td>24.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.010003</td>
+      <td>0.010003</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100003</td>
+      <td>3</td>
+      <td>484191.00</td>
+      <td>1035882.0</td>
+      <td>1452573.0</td>
+      <td>56553.990</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.50</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>3442.5</td>
+      <td>6885.0</td>
+      <td>6885.0</td>
+      <td>435436.5</td>
+      <td>900000.0</td>
+      <td>1306309.5</td>
+      <td>0.000000</td>
+      <td>0.100061</td>
+      <td>0.050030</td>
+      <td>-2341</td>
+      <td>-746</td>
+      <td>-1305.0</td>
+      <td>10.0</td>
+      <td>30.0</td>
+      <td>-48754.5</td>
+      <td>756.0</td>
+      <td>-146263.5</td>
+      <td>1.057664</td>
+      <td>1.150980</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>50.0</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.015272</td>
+      <td>0.018533</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100004</td>
+      <td>1</td>
+      <td>20106.00</td>
+      <td>20106.0</td>
+      <td>20106.0</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.00</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>4860.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>24282.0</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>-815</td>
+      <td>-815</td>
+      <td>-815.0</td>
+      <td>4.0</td>
+      <td>4.0</td>
+      <td>4176.0</td>
+      <td>4176.0</td>
+      <td>4176.0</td>
+      <td>0.828021</td>
+      <td>0.828021</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.016450</td>
+      <td>0.016450</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100005</td>
+      <td>2</td>
+      <td>20076.75</td>
+      <td>40153.5</td>
+      <td>40153.5</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.75</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>44617.5</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>-757</td>
+      <td>-315</td>
+      <td>-536.0</td>
+      <td>12.0</td>
+      <td>12.0</td>
+      <td>2232.0</td>
+      <td>4464.0</td>
+      <td>4464.0</td>
+      <td>0.899950</td>
+      <td>0.899950</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>0.036537</td>
+      <td>0.036537</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="계산된-PREV_REFUSED_COUNT-중-Null값은-0-으로-변경하고-SK_ID_CURR-개별-건수-대비-PREV_REFUSED_COUNT-비율-계산">
+<a class="anchor" href="#%EA%B3%84%EC%82%B0%EB%90%9C-PREV_REFUSED_COUNT-%EC%A4%91-Null%EA%B0%92%EC%9D%80-0-%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B3%A0-SK_ID_CURR-%EA%B0%9C%EB%B3%84-%EA%B1%B4%EC%88%98-%EB%8C%80%EB%B9%84-PREV_REFUSED_COUNT-%EB%B9%84%EC%9C%A8-%EA%B3%84%EC%82%B0" aria-hidden="true"><span class="octicon octicon-link"></span></a>계산된 PREV_REFUSED_COUNT 중 Null값은 0 으로 변경하고 SK_ID_CURR 개별 건수 대비 PREV_REFUSED_COUNT 비율 계산<a class="anchor-link" href="#%EA%B3%84%EC%82%B0%EB%90%9C-PREV_REFUSED_COUNT-%EC%A4%91-Null%EA%B0%92%EC%9D%80-0-%EC%9C%BC%EB%A1%9C-%EB%B3%80%EA%B2%BD%ED%95%98%EA%B3%A0-SK_ID_CURR-%EA%B0%9C%EB%B3%84-%EA%B1%B4%EC%88%98-%EB%8C%80%EB%B9%84-PREV_REFUSED_COUNT-%EB%B9%84%EC%9C%A8-%EA%B3%84%EC%82%B0"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">dropna</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>NaN     220580
+1.0      54616
+2.0      26793
+3.0      14025
+4.0       8243
+5.0       4859
+6.0       3147
+7.0       2069
+8.0       1247
+9.0        871
+10.0       656
+11.0       437
+12.0       340
+13.0       233
+14.0       157
+15.0       149
+16.0        94
+17.0        62
+18.0        54
+19.0        48
+20.0        28
+21.0        25
+22.0        21
+24.0        18
+25.0        12
+26.0        11
+23.0        11
+27.0         8
+29.0         5
+28.0         5
+32.0         4
+31.0         3
+41.0         3
+30.0         3
+37.0         3
+33.0         2
+34.0         2
+39.0         2
+35.0         2
+36.0         2
+47.0         1
+43.0         1
+64.0         1
+54.0         1
+58.0         1
+51.0         1
+68.0         1
+Name: PREV_REFUSED_COUNT, dtype: int64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">]</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># SK_ID_CURR별 과거 대출건수 대비 REFUSED_COUNT 비율 생성. </span>
+<span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">]</span><span class="o">/</span><span class="n">prev_amt_refused_agg</span><span class="p">[</span><span class="s1">'PREV_SK_ID_CURR_COUNT'</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_amt_refused_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SK_ID_CURR</th>
+      <th>PREV_SK_ID_CURR_COUNT</th>
+      <th>PREV_AMT_CREDIT_MEAN</th>
+      <th>PREV_AMT_CREDIT_MAX</th>
+      <th>PREV_AMT_CREDIT_SUM</th>
+      <th>PREV_AMT_ANNUITY_MEAN</th>
+      <th>PREV_AMT_ANNUITY_MAX</th>
+      <th>PREV_AMT_ANNUITY_SUM</th>
+      <th>PREV_AMT_APPLICATION_MEAN</th>
+      <th>PREV_AMT_APPLICATION_MAX</th>
+      <th>PREV_AMT_APPLICATION_SUM</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MAX</th>
+      <th>PREV_AMT_DOWN_PAYMENT_SUM</th>
+      <th>PREV_AMT_GOODS_PRICE_MEAN</th>
+      <th>PREV_AMT_GOODS_PRICE_MAX</th>
+      <th>PREV_AMT_GOODS_PRICE_SUM</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MIN</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MAX</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_DAYS_DECISION_MIN</th>
+      <th>PREV_DAYS_DECISION_MAX</th>
+      <th>PREV_DAYS_DECISION_MEAN</th>
+      <th>PREV_CNT_PAYMENT_MEAN</th>
+      <th>PREV_CNT_PAYMENT_SUM</th>
+      <th>PREV_PREV_CREDIT_DIFF_MEAN</th>
+      <th>PREV_PREV_CREDIT_DIFF_MAX</th>
+      <th>PREV_PREV_CREDIT_DIFF_SUM</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_MEAN</th>
+      <th>PREV_PREV_GOODS_DIFF_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_SUM</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MEAN</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_SUM</th>
+      <th>PREV_PREV_INTERESTS_RATE_MEAN</th>
+      <th>PREV_PREV_INTERESTS_RATE_MAX</th>
+      <th>PREV_REFUSED_COUNT</th>
+      <th>PREV_REFUSED_RATIO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100001</td>
+      <td>1</td>
+      <td>23787.000000</td>
+      <td>23787.0</td>
+      <td>23787.000</td>
+      <td>3951.000000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.500000</td>
+      <td>24835.5</td>
+      <td>24835.500</td>
+      <td>2520.000000</td>
+      <td>2520.0</td>
+      <td>2520.00</td>
+      <td>24835.500000</td>
+      <td>24835.5</td>
+      <td>24835.500</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>-1740</td>
+      <td>-1740</td>
+      <td>-1740.000000</td>
+      <td>8.000000</td>
+      <td>8.0</td>
+      <td>1048.500000</td>
+      <td>1048.5</td>
+      <td>1048.50</td>
+      <td>0.957782</td>
+      <td>0.957782</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>0.041099</td>
+      <td>0.041099</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100002</td>
+      <td>1</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>9251.775000</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-606</td>
+      <td>-606</td>
+      <td>-606.000000</td>
+      <td>24.000000</td>
+      <td>24.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.010003</td>
+      <td>0.010003</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100003</td>
+      <td>3</td>
+      <td>484191.000000</td>
+      <td>1035882.0</td>
+      <td>1452573.000</td>
+      <td>56553.990000</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.500000</td>
+      <td>900000.0</td>
+      <td>1306309.500</td>
+      <td>3442.500000</td>
+      <td>6885.0</td>
+      <td>6885.00</td>
+      <td>435436.500000</td>
+      <td>900000.0</td>
+      <td>1306309.500</td>
+      <td>0.000000</td>
+      <td>0.100061</td>
+      <td>0.050030</td>
+      <td>-2341</td>
+      <td>-746</td>
+      <td>-1305.000000</td>
+      <td>10.000000</td>
+      <td>30.0</td>
+      <td>-48754.500000</td>
+      <td>756.0</td>
+      <td>-146263.50</td>
+      <td>1.057664</td>
+      <td>1.150980</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>50.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.015272</td>
+      <td>0.018533</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100004</td>
+      <td>1</td>
+      <td>20106.000000</td>
+      <td>20106.0</td>
+      <td>20106.000</td>
+      <td>5357.250000</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.000000</td>
+      <td>24282.0</td>
+      <td>24282.000</td>
+      <td>4860.000000</td>
+      <td>4860.0</td>
+      <td>4860.00</td>
+      <td>24282.000000</td>
+      <td>24282.0</td>
+      <td>24282.000</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>-815</td>
+      <td>-815</td>
+      <td>-815.000000</td>
+      <td>4.000000</td>
+      <td>4.0</td>
+      <td>4176.000000</td>
+      <td>4176.0</td>
+      <td>4176.00</td>
+      <td>0.828021</td>
+      <td>0.828021</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.016450</td>
+      <td>0.016450</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100005</td>
+      <td>2</td>
+      <td>20076.750000</td>
+      <td>40153.5</td>
+      <td>40153.500</td>
+      <td>4813.200000</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.750000</td>
+      <td>44617.5</td>
+      <td>44617.500</td>
+      <td>4464.000000</td>
+      <td>4464.0</td>
+      <td>4464.00</td>
+      <td>44617.500000</td>
+      <td>44617.5</td>
+      <td>44617.500</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>-757</td>
+      <td>-315</td>
+      <td>-536.000000</td>
+      <td>12.000000</td>
+      <td>12.0</td>
+      <td>2232.000000</td>
+      <td>4464.0</td>
+      <td>4464.00</td>
+      <td>0.899950</td>
+      <td>0.899950</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.00</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>0.036537</td>
+      <td>0.036537</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100006</td>
+      <td>9</td>
+      <td>291695.500000</td>
+      <td>906615.0</td>
+      <td>2625259.500</td>
+      <td>23651.175000</td>
+      <td>39954.510</td>
+      <td>141907.050</td>
+      <td>272203.260000</td>
+      <td>688500.0</td>
+      <td>2449829.340</td>
+      <td>34840.170000</td>
+      <td>66987.0</td>
+      <td>69680.34</td>
+      <td>408304.890000</td>
+      <td>688500.0</td>
+      <td>2449829.340</td>
+      <td>0.108994</td>
+      <td>0.217830</td>
+      <td>0.163412</td>
+      <td>-617</td>
+      <td>-181</td>
+      <td>-272.444444</td>
+      <td>23.000000</td>
+      <td>138.0</td>
+      <td>-19492.240000</td>
+      <td>66987.0</td>
+      <td>-175430.16</td>
+      <td>1.012684</td>
+      <td>1.316797</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>810.00</td>
+      <td>1410.0</td>
+      <td>1620.0</td>
+      <td>-inf</td>
+      <td>0.027424</td>
+      <td>1.0</td>
+      <td>0.111111</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>100007</td>
+      <td>6</td>
+      <td>166638.750000</td>
+      <td>284400.0</td>
+      <td>999832.500</td>
+      <td>12278.805000</td>
+      <td>22678.785</td>
+      <td>73672.830</td>
+      <td>150530.250000</td>
+      <td>247500.0</td>
+      <td>903181.500</td>
+      <td>3390.750000</td>
+      <td>3676.5</td>
+      <td>6781.50</td>
+      <td>150530.250000</td>
+      <td>247500.0</td>
+      <td>903181.500</td>
+      <td>0.100143</td>
+      <td>0.218890</td>
+      <td>0.159516</td>
+      <td>-2357</td>
+      <td>-374</td>
+      <td>-1222.833333</td>
+      <td>20.666667</td>
+      <td>124.0</td>
+      <td>-16108.500000</td>
+      <td>2560.5</td>
+      <td>-96651.00</td>
+      <td>1.046356</td>
+      <td>1.264000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>7.50</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.026538</td>
+      <td>0.036164</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>100008</td>
+      <td>5</td>
+      <td>162767.700000</td>
+      <td>501975.0</td>
+      <td>813838.500</td>
+      <td>15839.696250</td>
+      <td>25309.575</td>
+      <td>63358.785</td>
+      <td>155701.800000</td>
+      <td>450000.0</td>
+      <td>778509.000</td>
+      <td>5548.500000</td>
+      <td>12145.5</td>
+      <td>16645.50</td>
+      <td>194627.250000</td>
+      <td>450000.0</td>
+      <td>778509.000</td>
+      <td>0.000000</td>
+      <td>0.110243</td>
+      <td>0.073051</td>
+      <td>-2536</td>
+      <td>-82</td>
+      <td>-1192.000000</td>
+      <td>14.000000</td>
+      <td>56.0</td>
+      <td>-7065.900000</td>
+      <td>12145.5</td>
+      <td>-35329.50</td>
+      <td>0.978569</td>
+      <td>1.115500</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>165.00</td>
+      <td>660.0</td>
+      <td>660.0</td>
+      <td>0.018055</td>
+      <td>0.034034</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>100009</td>
+      <td>7</td>
+      <td>70137.642857</td>
+      <td>98239.5</td>
+      <td>490963.500</td>
+      <td>10051.412143</td>
+      <td>17341.605</td>
+      <td>70359.885</td>
+      <td>76741.714286</td>
+      <td>110160.0</td>
+      <td>537192.000</td>
+      <td>9203.142857</td>
+      <td>22032.0</td>
+      <td>64422.00</td>
+      <td>76741.714286</td>
+      <td>110160.0</td>
+      <td>537192.000</td>
+      <td>0.000000</td>
+      <td>0.209525</td>
+      <td>0.126602</td>
+      <td>-1562</td>
+      <td>-74</td>
+      <td>-719.285714</td>
+      <td>8.000000</td>
+      <td>56.0</td>
+      <td>6604.071429</td>
+      <td>17671.5</td>
+      <td>46228.50</td>
+      <td>0.916226</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.019536</td>
+      <td>0.030703</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>100010</td>
+      <td>1</td>
+      <td>260811.000000</td>
+      <td>260811.0</td>
+      <td>260811.000</td>
+      <td>27463.410000</td>
+      <td>27463.410</td>
+      <td>27463.410</td>
+      <td>247212.000000</td>
+      <td>247212.0</td>
+      <td>247212.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>247212.000000</td>
+      <td>247212.0</td>
+      <td>247212.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1070</td>
+      <td>-1070</td>
+      <td>-1070.000000</td>
+      <td>10.000000</td>
+      <td>10.0</td>
+      <td>-13599.000000</td>
+      <td>-13599.0</td>
+      <td>-13599.00</td>
+      <td>1.055009</td>
+      <td>1.055009</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.005300</td>
+      <td>0.005300</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>100011</td>
+      <td>4</td>
+      <td>261840.375000</td>
+      <td>732915.0</td>
+      <td>1047361.500</td>
+      <td>18303.195000</td>
+      <td>31295.250</td>
+      <td>54909.585</td>
+      <td>202732.875000</td>
+      <td>675000.0</td>
+      <td>810931.500</td>
+      <td>6797.250000</td>
+      <td>13594.5</td>
+      <td>13594.50</td>
+      <td>270310.500000</td>
+      <td>675000.0</td>
+      <td>810931.500</td>
+      <td>0.000000</td>
+      <td>0.100010</td>
+      <td>0.050005</td>
+      <td>-2508</td>
+      <td>-1162</td>
+      <td>-1784.500000</td>
+      <td>14.000000</td>
+      <td>42.0</td>
+      <td>-59107.500000</td>
+      <td>1485.0</td>
+      <td>-236430.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-inf</td>
+      <td>0.025367</td>
+      <td>1.0</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>100012</td>
+      <td>4</td>
+      <td>74119.500000</td>
+      <td>158508.0</td>
+      <td>296478.000</td>
+      <td>7894.155000</td>
+      <td>11188.035</td>
+      <td>23682.465</td>
+      <td>60930.000000</td>
+      <td>135000.0</td>
+      <td>243720.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>81240.000000</td>
+      <td>135000.0</td>
+      <td>243720.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1673</td>
+      <td>-107</td>
+      <td>-779.750000</td>
+      <td>18.000000</td>
+      <td>54.0</td>
+      <td>-13189.500000</td>
+      <td>0.0</td>
+      <td>-52758.00</td>
+      <td>1.236566</td>
+      <td>1.269700</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>100.00</td>
+      <td>180.0</td>
+      <td>300.0</td>
+      <td>0.033372</td>
+      <td>0.043775</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>100013</td>
+      <td>4</td>
+      <td>146134.125000</td>
+      <td>512370.0</td>
+      <td>584536.500</td>
+      <td>11478.195000</td>
+      <td>23153.985</td>
+      <td>34434.585</td>
+      <td>130871.250000</td>
+      <td>450000.0</td>
+      <td>523485.000</td>
+      <td>3375.000000</td>
+      <td>6750.0</td>
+      <td>6750.00</td>
+      <td>174495.000000</td>
+      <td>450000.0</td>
+      <td>523485.000</td>
+      <td>0.000000</td>
+      <td>0.134434</td>
+      <td>0.067217</td>
+      <td>-1999</td>
+      <td>-222</td>
+      <td>-837.500000</td>
+      <td>17.333333</td>
+      <td>52.0</td>
+      <td>-15262.875000</td>
+      <td>3096.0</td>
+      <td>-61051.50</td>
+      <td>1.052363</td>
+      <td>1.138600</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>200.00</td>
+      <td>570.0</td>
+      <td>600.0</td>
+      <td>0.027617</td>
+      <td>0.036400</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>100014</td>
+      <td>2</td>
+      <td>102834.000000</td>
+      <td>131868.0</td>
+      <td>205668.000</td>
+      <td>12806.550000</td>
+      <td>14045.625</td>
+      <td>25613.100</td>
+      <td>96536.250000</td>
+      <td>119272.5</td>
+      <td>193072.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>96536.250000</td>
+      <td>119272.5</td>
+      <td>193072.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-844</td>
+      <td>-102</td>
+      <td>-473.000000</td>
+      <td>9.000000</td>
+      <td>18.0</td>
+      <td>-6297.750000</td>
+      <td>0.0</td>
+      <td>-12595.50</td>
+      <td>1.052801</td>
+      <td>1.105603</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014020</td>
+      <td>0.023653</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>100015</td>
+      <td>1</td>
+      <td>67077.000000</td>
+      <td>67077.0</td>
+      <td>67077.000</td>
+      <td>7666.920000</td>
+      <td>7666.920</td>
+      <td>7666.920</td>
+      <td>68850.000000</td>
+      <td>68850.0</td>
+      <td>68850.000</td>
+      <td>6885.000000</td>
+      <td>6885.0</td>
+      <td>6885.00</td>
+      <td>68850.000000</td>
+      <td>68850.0</td>
+      <td>68850.000</td>
+      <td>0.101382</td>
+      <td>0.101382</td>
+      <td>0.101382</td>
+      <td>-2396</td>
+      <td>-2396</td>
+      <td>-2396.000000</td>
+      <td>10.000000</td>
+      <td>10.0</td>
+      <td>1773.000000</td>
+      <td>1773.0</td>
+      <td>1773.00</td>
+      <td>0.974248</td>
+      <td>0.974248</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014300</td>
+      <td>0.014300</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>100016</td>
+      <td>4</td>
+      <td>106221.375000</td>
+      <td>232200.0</td>
+      <td>424885.500</td>
+      <td>8593.155000</td>
+      <td>14480.460</td>
+      <td>34372.620</td>
+      <td>120745.125000</td>
+      <td>290250.0</td>
+      <td>482980.500</td>
+      <td>15690.375000</td>
+      <td>58050.0</td>
+      <td>62761.50</td>
+      <td>120745.125000</td>
+      <td>290250.0</td>
+      <td>482980.500</td>
+      <td>0.000000</td>
+      <td>0.217818</td>
+      <td>0.081682</td>
+      <td>-2370</td>
+      <td>-1049</td>
+      <td>-1779.500000</td>
+      <td>17.000000</td>
+      <td>68.0</td>
+      <td>14523.750000</td>
+      <td>58050.0</td>
+      <td>58095.00</td>
+      <td>0.949761</td>
+      <td>1.099045</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>70.00</td>
+      <td>210.0</td>
+      <td>210.0</td>
+      <td>0.029580</td>
+      <td>0.033600</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>100017</td>
+      <td>2</td>
+      <td>175565.250000</td>
+      <td>198409.5</td>
+      <td>351130.500</td>
+      <td>14375.407500</td>
+      <td>16967.295</td>
+      <td>28750.815</td>
+      <td>176665.500000</td>
+      <td>195291.0</td>
+      <td>353331.000</td>
+      <td>19152.000000</td>
+      <td>22500.0</td>
+      <td>38304.00</td>
+      <td>176665.500000</td>
+      <td>195291.0</td>
+      <td>353331.000</td>
+      <td>0.102133</td>
+      <td>0.110926</td>
+      <td>0.106529</td>
+      <td>-2441</td>
+      <td>-612</td>
+      <td>-1526.500000</td>
+      <td>17.000000</td>
+      <td>34.0</td>
+      <td>1100.250000</td>
+      <td>5319.0</td>
+      <td>2200.50</td>
+      <td>0.991156</td>
+      <td>1.015968</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014412</td>
+      <td>0.017723</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>100018</td>
+      <td>4</td>
+      <td>285989.591250</td>
+      <td>536364.0</td>
+      <td>1143958.365</td>
+      <td>38669.703750</td>
+      <td>94906.035</td>
+      <td>154678.815</td>
+      <td>298363.466250</td>
+      <td>571774.5</td>
+      <td>1193453.865</td>
+      <td>14295.375000</td>
+      <td>57181.5</td>
+      <td>57181.50</td>
+      <td>298363.466250</td>
+      <td>571774.5</td>
+      <td>1193453.865</td>
+      <td>0.000000</td>
+      <td>0.108917</td>
+      <td>0.027229</td>
+      <td>-1648</td>
+      <td>-188</td>
+      <td>-755.250000</td>
+      <td>10.000000</td>
+      <td>40.0</td>
+      <td>12373.875000</td>
+      <td>57181.5</td>
+      <td>49495.50</td>
+      <td>1.014609</td>
+      <td>1.158442</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>-9.00</td>
+      <td>0.0</td>
+      <td>-18.0</td>
+      <td>0.018384</td>
+      <td>0.038257</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>100019</td>
+      <td>1</td>
+      <td>104683.500000</td>
+      <td>104683.5</td>
+      <td>104683.500</td>
+      <td>10518.615000</td>
+      <td>10518.615</td>
+      <td>10518.615</td>
+      <td>84136.500000</td>
+      <td>84136.5</td>
+      <td>84136.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>84136.500000</td>
+      <td>84136.5</td>
+      <td>84136.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-925</td>
+      <td>-925</td>
+      <td>-925.000000</td>
+      <td>12.000000</td>
+      <td>12.0</td>
+      <td>-20547.000000</td>
+      <td>-20547.0</td>
+      <td>-20547.00</td>
+      <td>1.244210</td>
+      <td>1.244210</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.017147</td>
+      <td>0.017147</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>100020</td>
+      <td>2</td>
+      <td>41706.000000</td>
+      <td>48325.5</td>
+      <td>83412.000</td>
+      <td>7254.517500</td>
+      <td>8779.770</td>
+      <td>14509.035</td>
+      <td>39206.250000</td>
+      <td>45900.0</td>
+      <td>78412.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>39206.250000</td>
+      <td>45900.0</td>
+      <td>78412.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-472</td>
+      <td>-243</td>
+      <td>-357.500000</td>
+      <td>7.000000</td>
+      <td>14.0</td>
+      <td>-2499.750000</td>
+      <td>-2425.5</td>
+      <td>-4999.50</td>
+      <td>1.066006</td>
+      <td>1.079170</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.026651</td>
+      <td>0.038290</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>100021</td>
+      <td>6</td>
+      <td>153615.750000</td>
+      <td>675000.0</td>
+      <td>921694.500</td>
+      <td>10686.165000</td>
+      <td>33750.000</td>
+      <td>64116.990</td>
+      <td>40961.250000</td>
+      <td>99189.0</td>
+      <td>245767.500</td>
+      <td>3770.100000</td>
+      <td>9922.5</td>
+      <td>18850.50</td>
+      <td>49153.500000</td>
+      <td>99189.0</td>
+      <td>245767.500</td>
+      <td>0.000000</td>
+      <td>0.433539</td>
+      <td>0.106606</td>
+      <td>-2811</td>
+      <td>-261</td>
+      <td>-943.833333</td>
+      <td>7.000000</td>
+      <td>42.0</td>
+      <td>-112654.500000</td>
+      <td>8928.0</td>
+      <td>-675927.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.00</td>
+      <td>180.0</td>
+      <td>270.0</td>
+      <td>-inf</td>
+      <td>0.034033</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>100022</td>
+      <td>1</td>
+      <td>103203.000000</td>
+      <td>103203.0</td>
+      <td>103203.000</td>
+      <td>6765.975000</td>
+      <td>6765.975</td>
+      <td>6765.975</td>
+      <td>89091.000000</td>
+      <td>89091.0</td>
+      <td>89091.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>89091.000000</td>
+      <td>89091.0</td>
+      <td>89091.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-239</td>
+      <td>-239</td>
+      <td>-239.000000</td>
+      <td>18.000000</td>
+      <td>18.0</td>
+      <td>-14112.000000</td>
+      <td>-14112.0</td>
+      <td>-14112.00</td>
+      <td>1.158400</td>
+      <td>1.158400</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.010004</td>
+      <td>0.010004</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>100023</td>
+      <td>4</td>
+      <td>113517.000000</td>
+      <td>239242.5</td>
+      <td>454068.000</td>
+      <td>8895.892500</td>
+      <td>16822.440</td>
+      <td>35583.570</td>
+      <td>98746.875000</td>
+      <td>180000.0</td>
+      <td>394987.500</td>
+      <td>8435.250000</td>
+      <td>9000.0</td>
+      <td>16870.50</td>
+      <td>98746.875000</td>
+      <td>180000.0</td>
+      <td>394987.500</td>
+      <td>0.095959</td>
+      <td>0.101380</td>
+      <td>0.098669</td>
+      <td>-2424</td>
+      <td>-262</td>
+      <td>-1215.750000</td>
+      <td>12.500000</td>
+      <td>50.0</td>
+      <td>-14770.125000</td>
+      <td>2025.0</td>
+      <td>-59080.50</td>
+      <td>1.080951</td>
+      <td>1.329125</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>240.00</td>
+      <td>600.0</td>
+      <td>720.0</td>
+      <td>-inf</td>
+      <td>0.028649</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>100025</td>
+      <td>8</td>
+      <td>295425.781875</td>
+      <td>1042560.0</td>
+      <td>2363406.255</td>
+      <td>27645.595714</td>
+      <td>55678.095</td>
+      <td>193519.170</td>
+      <td>259795.344375</td>
+      <td>900000.0</td>
+      <td>2078362.755</td>
+      <td>5845.500000</td>
+      <td>23382.0</td>
+      <td>23382.00</td>
+      <td>296908.965000</td>
+      <td>900000.0</td>
+      <td>2078362.755</td>
+      <td>0.000000</td>
+      <td>0.423065</td>
+      <td>0.105766</td>
+      <td>-2060</td>
+      <td>-7</td>
+      <td>-731.000000</td>
+      <td>13.714286</td>
+      <td>96.0</td>
+      <td>-35630.437500</td>
+      <td>21645.0</td>
+      <td>-285043.50</td>
+      <td>1.073930</td>
+      <td>1.269700</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>174.25</td>
+      <td>367.0</td>
+      <td>697.0</td>
+      <td>0.022884</td>
+      <td>0.027871</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>100026</td>
+      <td>3</td>
+      <td>292281.000000</td>
+      <td>744498.0</td>
+      <td>876843.000</td>
+      <td>33193.665000</td>
+      <td>42778.845</td>
+      <td>66387.330</td>
+      <td>269115.000000</td>
+      <td>675000.0</td>
+      <td>807345.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>403672.500000</td>
+      <td>675000.0</td>
+      <td>807345.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1427</td>
+      <td>-152</td>
+      <td>-682.333333</td>
+      <td>21.000000</td>
+      <td>42.0</td>
+      <td>-23166.000000</td>
+      <td>0.0</td>
+      <td>-69498.00</td>
+      <td>1.051480</td>
+      <td>1.102960</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>510.00</td>
+      <td>1020.0</td>
+      <td>1020.0</td>
+      <td>0.020701</td>
+      <td>0.029682</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>100027</td>
+      <td>4</td>
+      <td>173795.625000</td>
+      <td>239850.0</td>
+      <td>695182.500</td>
+      <td>24067.755000</td>
+      <td>28077.570</td>
+      <td>72203.265</td>
+      <td>163621.125000</td>
+      <td>226984.5</td>
+      <td>654484.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>218161.500000</td>
+      <td>226984.5</td>
+      <td>654484.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-795</td>
+      <td>-181</td>
+      <td>-407.000000</td>
+      <td>11.333333</td>
+      <td>34.0</td>
+      <td>-10174.500000</td>
+      <td>0.0</td>
+      <td>-40698.00</td>
+      <td>1.062332</td>
+      <td>1.066000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014849</td>
+      <td>0.017250</td>
+      <td>1.0</td>
+      <td>0.250000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>100028</td>
+      <td>5</td>
+      <td>92920.500000</td>
+      <td>225000.0</td>
+      <td>464602.500</td>
+      <td>8091.585000</td>
+      <td>11250.000</td>
+      <td>24274.755</td>
+      <td>49207.500000</td>
+      <td>130765.5</td>
+      <td>246037.500</td>
+      <td>3750.000000</td>
+      <td>11250.0</td>
+      <td>11250.00</td>
+      <td>82012.500000</td>
+      <td>130765.5</td>
+      <td>246037.500</td>
+      <td>0.000000</td>
+      <td>0.173124</td>
+      <td>0.057708</td>
+      <td>-1805</td>
+      <td>-531</td>
+      <td>-1124.200000</td>
+      <td>11.333333</td>
+      <td>34.0</td>
+      <td>-43713.000000</td>
+      <td>6435.0</td>
+      <td>-218565.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>75.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>-inf</td>
+      <td>0.017550</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>100029</td>
+      <td>1</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>22891.680000</td>
+      <td>22891.680</td>
+      <td>22891.680</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-324</td>
+      <td>-324</td>
+      <td>-324.000000</td>
+      <td>6.000000</td>
+      <td>6.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>60.00</td>
+      <td>60.0</td>
+      <td>60.0</td>
+      <td>0.015013</td>
+      <td>0.015013</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>100030</td>
+      <td>12</td>
+      <td>32534.643750</td>
+      <td>49734.0</td>
+      <td>390415.725</td>
+      <td>4731.041250</td>
+      <td>9035.685</td>
+      <td>37848.330</td>
+      <td>33497.268750</td>
+      <td>47241.0</td>
+      <td>401967.225</td>
+      <td>1262.625000</td>
+      <td>6714.0</td>
+      <td>15151.50</td>
+      <td>33497.268750</td>
+      <td>47241.0</td>
+      <td>401967.225</td>
+      <td>0.000000</td>
+      <td>0.210919</td>
+      <td>0.044804</td>
+      <td>-2856</td>
+      <td>-378</td>
+      <td>-1981.083333</td>
+      <td>8.625000</td>
+      <td>69.0</td>
+      <td>962.625000</td>
+      <td>5607.0</td>
+      <td>11551.50</td>
+      <td>0.965475</td>
+      <td>1.052772</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>60.00</td>
+      <td>90.0</td>
+      <td>120.0</td>
+      <td>0.017772</td>
+      <td>0.037233</td>
+      <td>10.0</td>
+      <td>0.833333</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>100032</td>
+      <td>1</td>
+      <td>42255.000000</td>
+      <td>42255.0</td>
+      <td>42255.000</td>
+      <td>7910.145000</td>
+      <td>7910.145</td>
+      <td>7910.145</td>
+      <td>69255.000000</td>
+      <td>69255.0</td>
+      <td>69255.000</td>
+      <td>27000.000000</td>
+      <td>27000.0</td>
+      <td>27000.00</td>
+      <td>69255.000000</td>
+      <td>69255.0</td>
+      <td>69255.000</td>
+      <td>0.424597</td>
+      <td>0.424597</td>
+      <td>0.424597</td>
+      <td>-1497</td>
+      <td>-1497</td>
+      <td>-1497.000000</td>
+      <td>6.000000</td>
+      <td>6.0</td>
+      <td>27000.000000</td>
+      <td>27000.0</td>
+      <td>27000.00</td>
+      <td>0.610136</td>
+      <td>0.610136</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.020534</td>
+      <td>0.020534</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_refused_appr_group</span> <span class="o">=</span> <span class="n">prev</span><span class="p">[</span><span class="n">prev</span><span class="p">[</span><span class="s1">'NAME_CONTRACT_STATUS'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s1">'Approved'</span><span class="p">,</span> <span class="s1">'Refused'</span><span class="p">])]</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span> <span class="s1">'SK_ID_CURR'</span><span class="p">,</span> <span class="s1">'NAME_CONTRACT_STATUS'</span><span class="p">])</span>
+<span class="n">prev_refused_appr_agg</span> <span class="o">=</span> <span class="n">prev_refused_appr_group</span><span class="p">[</span><span class="s1">'SK_ID_CURR'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span><span class="o">.</span><span class="n">unstack</span><span class="p">()</span>
+<span class="n">prev_refused_appr_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th>NAME_CONTRACT_STATUS</th>
+      <th>Approved</th>
+      <th>Refused</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100006</th>
+      <td>5.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>100007</th>
+      <td>6.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100008</th>
+      <td>4.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100009</th>
+      <td>7.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100010</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100011</th>
+      <td>3.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>100012</th>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100013</th>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100014</th>
+      <td>2.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100015</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100016</th>
+      <td>4.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100017</th>
+      <td>2.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100018</th>
+      <td>4.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100019</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100020</th>
+      <td>2.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100021</th>
+      <td>6.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100022</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100023</th>
+      <td>4.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100025</th>
+      <td>7.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100026</th>
+      <td>2.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100027</th>
+      <td>2.0</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>100028</th>
+      <td>3.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100029</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>100030</th>
+      <td>2.0</td>
+      <td>10.0</td>
+    </tr>
+    <tr>
+      <th>100032</th>
+      <td>1.0</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h5 id="컬럼명-변경,-Null-처리,-그리고-기존의-prev_amt_agg와-조인-후-데이터-가공">
+<a class="anchor" href="#%EC%BB%AC%EB%9F%BC%EB%AA%85-%EB%B3%80%EA%B2%BD,-Null-%EC%B2%98%EB%A6%AC,-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EA%B8%B0%EC%A1%B4%EC%9D%98-prev_amt_agg%EC%99%80-%EC%A1%B0%EC%9D%B8-%ED%9B%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EA%B3%B5" aria-hidden="true"><span class="octicon octicon-link"></span></a>컬럼명 변경, Null 처리, 그리고 기존의 prev_amt_agg와 조인 후 데이터 가공<a class="anchor-link" href="#%EC%BB%AC%EB%9F%BC%EB%AA%85-%EB%B3%80%EA%B2%BD,-Null-%EC%B2%98%EB%A6%AC,-%EA%B7%B8%EB%A6%AC%EA%B3%A0-%EA%B8%B0%EC%A1%B4%EC%9D%98-prev_amt_agg%EC%99%80-%EC%A1%B0%EC%9D%B8-%ED%9B%84-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EA%B0%80%EA%B3%B5"> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_refused_appr_agg</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'PREV_APPROVED_COUNT'</span><span class="p">,</span> <span class="s1">'PREV_REFUSED_COUNT'</span> <span class="p">]</span>
+<span class="c1"># NaN값은 모두 0으로 변경. </span>
+<span class="n">prev_refused_appr_agg</span> <span class="o">=</span> <span class="n">prev_refused_appr_agg</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_refused_appr_agg</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>PREV_APPROVED_COUNT</th>
+      <th>PREV_REFUSED_COUNT</th>
+    </tr>
+    <tr>
+      <th>SK_ID_CURR</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>100001</th>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>100002</th>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>100003</th>
+      <td>3.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>100004</th>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+    <tr>
+      <th>100005</th>
+      <td>1.0</td>
+      <td>0.0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prev_agg</span> <span class="o">=</span> <span class="n">prev_amt_agg</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">prev_refused_appr_agg</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'SK_ID_CURR'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'left'</span><span class="p">)</span>
+<span class="c1"># SK_ID_CURR별 과거 대출건수 대비 APPROVED_COUNT 및 REFUSED_COUNT 비율 생성. </span>
+<span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">]</span><span class="o">/</span><span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_SK_ID_CURR_COUNT'</span><span class="p">]</span>
+<span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_APPROVED_RATIO'</span><span class="p">]</span> <span class="o">=</span> <span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_APPROVED_COUNT'</span><span class="p">]</span><span class="o">/</span><span class="n">prev_agg</span><span class="p">[</span><span class="s1">'PREV_SK_ID_CURR_COUNT'</span><span class="p">]</span>
+<span class="c1"># 'PREV_REFUSED_COUNT', 'PREV_APPROVED_COUNT' 컬럼 drop </span>
+<span class="n">prev_agg</span> <span class="o">=</span> <span class="n">prev_agg</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'PREV_REFUSED_COUNT'</span><span class="p">,</span> <span class="s1">'PREV_APPROVED_COUNT'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="c1"># prev_amt_agg와 prev_refused_appr_agg INDEX인 SK_ID_CURR이 조인 후 정식 컬럼으로 생성됨. </span>
+<span class="n">prev_agg</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>SK_ID_CURR</th>
+      <th>PREV_SK_ID_CURR_COUNT</th>
+      <th>PREV_AMT_CREDIT_MEAN</th>
+      <th>PREV_AMT_CREDIT_MAX</th>
+      <th>PREV_AMT_CREDIT_SUM</th>
+      <th>PREV_AMT_ANNUITY_MEAN</th>
+      <th>PREV_AMT_ANNUITY_MAX</th>
+      <th>PREV_AMT_ANNUITY_SUM</th>
+      <th>PREV_AMT_APPLICATION_MEAN</th>
+      <th>PREV_AMT_APPLICATION_MAX</th>
+      <th>PREV_AMT_APPLICATION_SUM</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_AMT_DOWN_PAYMENT_MAX</th>
+      <th>PREV_AMT_DOWN_PAYMENT_SUM</th>
+      <th>PREV_AMT_GOODS_PRICE_MEAN</th>
+      <th>PREV_AMT_GOODS_PRICE_MAX</th>
+      <th>PREV_AMT_GOODS_PRICE_SUM</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MIN</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MAX</th>
+      <th>PREV_RATE_DOWN_PAYMENT_MEAN</th>
+      <th>PREV_DAYS_DECISION_MIN</th>
+      <th>PREV_DAYS_DECISION_MAX</th>
+      <th>PREV_DAYS_DECISION_MEAN</th>
+      <th>PREV_CNT_PAYMENT_MEAN</th>
+      <th>PREV_CNT_PAYMENT_SUM</th>
+      <th>PREV_PREV_CREDIT_DIFF_MEAN</th>
+      <th>PREV_PREV_CREDIT_DIFF_MAX</th>
+      <th>PREV_PREV_CREDIT_DIFF_SUM</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_CREDIT_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_MEAN</th>
+      <th>PREV_PREV_GOODS_DIFF_MAX</th>
+      <th>PREV_PREV_GOODS_DIFF_SUM</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MEAN</th>
+      <th>PREV_PREV_GOODS_APPL_RATIO_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MEAN</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_MAX</th>
+      <th>PREV_PREV_DAYS_LAST_DUE_DIFF_SUM</th>
+      <th>PREV_PREV_INTERESTS_RATE_MEAN</th>
+      <th>PREV_PREV_INTERESTS_RATE_MAX</th>
+      <th>PREV_REFUSED_RATIO</th>
+      <th>PREV_APPROVED_RATIO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>100001</td>
+      <td>1</td>
+      <td>23787.000000</td>
+      <td>23787.0</td>
+      <td>23787.000</td>
+      <td>3951.000000</td>
+      <td>3951.000</td>
+      <td>3951.000</td>
+      <td>24835.500000</td>
+      <td>24835.5</td>
+      <td>24835.500</td>
+      <td>2520.000000</td>
+      <td>2520.0</td>
+      <td>2520.00</td>
+      <td>24835.500000</td>
+      <td>24835.5</td>
+      <td>24835.500</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>0.104326</td>
+      <td>-1740</td>
+      <td>-1740</td>
+      <td>-1740.000000</td>
+      <td>8.000000</td>
+      <td>8.0</td>
+      <td>1048.500000</td>
+      <td>1048.5</td>
+      <td>1048.50</td>
+      <td>0.957782</td>
+      <td>0.957782</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>120.00</td>
+      <td>120.0</td>
+      <td>120.0</td>
+      <td>0.041099</td>
+      <td>0.041099</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>100002</td>
+      <td>1</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>9251.775000</td>
+      <td>9251.775</td>
+      <td>9251.775</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>179055.000000</td>
+      <td>179055.0</td>
+      <td>179055.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-606</td>
+      <td>-606</td>
+      <td>-606.000000</td>
+      <td>24.000000</td>
+      <td>24.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.010003</td>
+      <td>0.010003</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>100003</td>
+      <td>3</td>
+      <td>484191.000000</td>
+      <td>1035882.0</td>
+      <td>1452573.000</td>
+      <td>56553.990000</td>
+      <td>98356.995</td>
+      <td>169661.970</td>
+      <td>435436.500000</td>
+      <td>900000.0</td>
+      <td>1306309.500</td>
+      <td>3442.500000</td>
+      <td>6885.0</td>
+      <td>6885.00</td>
+      <td>435436.500000</td>
+      <td>900000.0</td>
+      <td>1306309.500</td>
+      <td>0.000000</td>
+      <td>0.100061</td>
+      <td>0.050030</td>
+      <td>-2341</td>
+      <td>-746</td>
+      <td>-1305.000000</td>
+      <td>10.000000</td>
+      <td>30.0</td>
+      <td>-48754.500000</td>
+      <td>756.0</td>
+      <td>-146263.50</td>
+      <td>1.057664</td>
+      <td>1.150980</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>50.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.015272</td>
+      <td>0.018533</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>100004</td>
+      <td>1</td>
+      <td>20106.000000</td>
+      <td>20106.0</td>
+      <td>20106.000</td>
+      <td>5357.250000</td>
+      <td>5357.250</td>
+      <td>5357.250</td>
+      <td>24282.000000</td>
+      <td>24282.0</td>
+      <td>24282.000</td>
+      <td>4860.000000</td>
+      <td>4860.0</td>
+      <td>4860.00</td>
+      <td>24282.000000</td>
+      <td>24282.0</td>
+      <td>24282.000</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>0.212008</td>
+      <td>-815</td>
+      <td>-815</td>
+      <td>-815.000000</td>
+      <td>4.000000</td>
+      <td>4.0</td>
+      <td>4176.000000</td>
+      <td>4176.0</td>
+      <td>4176.00</td>
+      <td>0.828021</td>
+      <td>0.828021</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>30.00</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.016450</td>
+      <td>0.016450</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>100005</td>
+      <td>2</td>
+      <td>20076.750000</td>
+      <td>40153.5</td>
+      <td>40153.500</td>
+      <td>4813.200000</td>
+      <td>4813.200</td>
+      <td>4813.200</td>
+      <td>22308.750000</td>
+      <td>44617.5</td>
+      <td>44617.500</td>
+      <td>4464.000000</td>
+      <td>4464.0</td>
+      <td>4464.00</td>
+      <td>44617.500000</td>
+      <td>44617.5</td>
+      <td>44617.500</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>0.108964</td>
+      <td>-757</td>
+      <td>-315</td>
+      <td>-536.000000</td>
+      <td>12.000000</td>
+      <td>12.0</td>
+      <td>2232.000000</td>
+      <td>4464.0</td>
+      <td>4464.00</td>
+      <td>0.899950</td>
+      <td>0.899950</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.00</td>
+      <td>90.0</td>
+      <td>90.0</td>
+      <td>0.036537</td>
+      <td>0.036537</td>
+      <td>0.000000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>100006</td>
+      <td>9</td>
+      <td>291695.500000</td>
+      <td>906615.0</td>
+      <td>2625259.500</td>
+      <td>23651.175000</td>
+      <td>39954.510</td>
+      <td>141907.050</td>
+      <td>272203.260000</td>
+      <td>688500.0</td>
+      <td>2449829.340</td>
+      <td>34840.170000</td>
+      <td>66987.0</td>
+      <td>69680.34</td>
+      <td>408304.890000</td>
+      <td>688500.0</td>
+      <td>2449829.340</td>
+      <td>0.108994</td>
+      <td>0.217830</td>
+      <td>0.163412</td>
+      <td>-617</td>
+      <td>-181</td>
+      <td>-272.444444</td>
+      <td>23.000000</td>
+      <td>138.0</td>
+      <td>-19492.240000</td>
+      <td>66987.0</td>
+      <td>-175430.16</td>
+      <td>1.012684</td>
+      <td>1.316797</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>810.00</td>
+      <td>1410.0</td>
+      <td>1620.0</td>
+      <td>-inf</td>
+      <td>0.027424</td>
+      <td>0.111111</td>
+      <td>0.555556</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>100007</td>
+      <td>6</td>
+      <td>166638.750000</td>
+      <td>284400.0</td>
+      <td>999832.500</td>
+      <td>12278.805000</td>
+      <td>22678.785</td>
+      <td>73672.830</td>
+      <td>150530.250000</td>
+      <td>247500.0</td>
+      <td>903181.500</td>
+      <td>3390.750000</td>
+      <td>3676.5</td>
+      <td>6781.50</td>
+      <td>150530.250000</td>
+      <td>247500.0</td>
+      <td>903181.500</td>
+      <td>0.100143</td>
+      <td>0.218890</td>
+      <td>0.159516</td>
+      <td>-2357</td>
+      <td>-374</td>
+      <td>-1222.833333</td>
+      <td>20.666667</td>
+      <td>124.0</td>
+      <td>-16108.500000</td>
+      <td>2560.5</td>
+      <td>-96651.00</td>
+      <td>1.046356</td>
+      <td>1.264000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>7.50</td>
+      <td>30.0</td>
+      <td>30.0</td>
+      <td>0.026538</td>
+      <td>0.036164</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>100008</td>
+      <td>5</td>
+      <td>162767.700000</td>
+      <td>501975.0</td>
+      <td>813838.500</td>
+      <td>15839.696250</td>
+      <td>25309.575</td>
+      <td>63358.785</td>
+      <td>155701.800000</td>
+      <td>450000.0</td>
+      <td>778509.000</td>
+      <td>5548.500000</td>
+      <td>12145.5</td>
+      <td>16645.50</td>
+      <td>194627.250000</td>
+      <td>450000.0</td>
+      <td>778509.000</td>
+      <td>0.000000</td>
+      <td>0.110243</td>
+      <td>0.073051</td>
+      <td>-2536</td>
+      <td>-82</td>
+      <td>-1192.000000</td>
+      <td>14.000000</td>
+      <td>56.0</td>
+      <td>-7065.900000</td>
+      <td>12145.5</td>
+      <td>-35329.50</td>
+      <td>0.978569</td>
+      <td>1.115500</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>165.00</td>
+      <td>660.0</td>
+      <td>660.0</td>
+      <td>0.018055</td>
+      <td>0.034034</td>
+      <td>0.000000</td>
+      <td>0.800000</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>100009</td>
+      <td>7</td>
+      <td>70137.642857</td>
+      <td>98239.5</td>
+      <td>490963.500</td>
+      <td>10051.412143</td>
+      <td>17341.605</td>
+      <td>70359.885</td>
+      <td>76741.714286</td>
+      <td>110160.0</td>
+      <td>537192.000</td>
+      <td>9203.142857</td>
+      <td>22032.0</td>
+      <td>64422.00</td>
+      <td>76741.714286</td>
+      <td>110160.0</td>
+      <td>537192.000</td>
+      <td>0.000000</td>
+      <td>0.209525</td>
+      <td>0.126602</td>
+      <td>-1562</td>
+      <td>-74</td>
+      <td>-719.285714</td>
+      <td>8.000000</td>
+      <td>56.0</td>
+      <td>6604.071429</td>
+      <td>17671.5</td>
+      <td>46228.50</td>
+      <td>0.916226</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.019536</td>
+      <td>0.030703</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>100010</td>
+      <td>1</td>
+      <td>260811.000000</td>
+      <td>260811.0</td>
+      <td>260811.000</td>
+      <td>27463.410000</td>
+      <td>27463.410</td>
+      <td>27463.410</td>
+      <td>247212.000000</td>
+      <td>247212.0</td>
+      <td>247212.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>247212.000000</td>
+      <td>247212.0</td>
+      <td>247212.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1070</td>
+      <td>-1070</td>
+      <td>-1070.000000</td>
+      <td>10.000000</td>
+      <td>10.0</td>
+      <td>-13599.000000</td>
+      <td>-13599.0</td>
+      <td>-13599.00</td>
+      <td>1.055009</td>
+      <td>1.055009</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.005300</td>
+      <td>0.005300</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>100011</td>
+      <td>4</td>
+      <td>261840.375000</td>
+      <td>732915.0</td>
+      <td>1047361.500</td>
+      <td>18303.195000</td>
+      <td>31295.250</td>
+      <td>54909.585</td>
+      <td>202732.875000</td>
+      <td>675000.0</td>
+      <td>810931.500</td>
+      <td>6797.250000</td>
+      <td>13594.5</td>
+      <td>13594.50</td>
+      <td>270310.500000</td>
+      <td>675000.0</td>
+      <td>810931.500</td>
+      <td>0.000000</td>
+      <td>0.100010</td>
+      <td>0.050005</td>
+      <td>-2508</td>
+      <td>-1162</td>
+      <td>-1784.500000</td>
+      <td>14.000000</td>
+      <td>42.0</td>
+      <td>-59107.500000</td>
+      <td>1485.0</td>
+      <td>-236430.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>-inf</td>
+      <td>0.025367</td>
+      <td>0.250000</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>100012</td>
+      <td>4</td>
+      <td>74119.500000</td>
+      <td>158508.0</td>
+      <td>296478.000</td>
+      <td>7894.155000</td>
+      <td>11188.035</td>
+      <td>23682.465</td>
+      <td>60930.000000</td>
+      <td>135000.0</td>
+      <td>243720.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>81240.000000</td>
+      <td>135000.0</td>
+      <td>243720.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1673</td>
+      <td>-107</td>
+      <td>-779.750000</td>
+      <td>18.000000</td>
+      <td>54.0</td>
+      <td>-13189.500000</td>
+      <td>0.0</td>
+      <td>-52758.00</td>
+      <td>1.236566</td>
+      <td>1.269700</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>100.00</td>
+      <td>180.0</td>
+      <td>300.0</td>
+      <td>0.033372</td>
+      <td>0.043775</td>
+      <td>0.000000</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>100013</td>
+      <td>4</td>
+      <td>146134.125000</td>
+      <td>512370.0</td>
+      <td>584536.500</td>
+      <td>11478.195000</td>
+      <td>23153.985</td>
+      <td>34434.585</td>
+      <td>130871.250000</td>
+      <td>450000.0</td>
+      <td>523485.000</td>
+      <td>3375.000000</td>
+      <td>6750.0</td>
+      <td>6750.00</td>
+      <td>174495.000000</td>
+      <td>450000.0</td>
+      <td>523485.000</td>
+      <td>0.000000</td>
+      <td>0.134434</td>
+      <td>0.067217</td>
+      <td>-1999</td>
+      <td>-222</td>
+      <td>-837.500000</td>
+      <td>17.333333</td>
+      <td>52.0</td>
+      <td>-15262.875000</td>
+      <td>3096.0</td>
+      <td>-61051.50</td>
+      <td>1.052363</td>
+      <td>1.138600</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>200.00</td>
+      <td>570.0</td>
+      <td>600.0</td>
+      <td>0.027617</td>
+      <td>0.036400</td>
+      <td>0.000000</td>
+      <td>0.750000</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>100014</td>
+      <td>2</td>
+      <td>102834.000000</td>
+      <td>131868.0</td>
+      <td>205668.000</td>
+      <td>12806.550000</td>
+      <td>14045.625</td>
+      <td>25613.100</td>
+      <td>96536.250000</td>
+      <td>119272.5</td>
+      <td>193072.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>96536.250000</td>
+      <td>119272.5</td>
+      <td>193072.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-844</td>
+      <td>-102</td>
+      <td>-473.000000</td>
+      <td>9.000000</td>
+      <td>18.0</td>
+      <td>-6297.750000</td>
+      <td>0.0</td>
+      <td>-12595.50</td>
+      <td>1.052801</td>
+      <td>1.105603</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014020</td>
+      <td>0.023653</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>100015</td>
+      <td>1</td>
+      <td>67077.000000</td>
+      <td>67077.0</td>
+      <td>67077.000</td>
+      <td>7666.920000</td>
+      <td>7666.920</td>
+      <td>7666.920</td>
+      <td>68850.000000</td>
+      <td>68850.0</td>
+      <td>68850.000</td>
+      <td>6885.000000</td>
+      <td>6885.0</td>
+      <td>6885.00</td>
+      <td>68850.000000</td>
+      <td>68850.0</td>
+      <td>68850.000</td>
+      <td>0.101382</td>
+      <td>0.101382</td>
+      <td>0.101382</td>
+      <td>-2396</td>
+      <td>-2396</td>
+      <td>-2396.000000</td>
+      <td>10.000000</td>
+      <td>10.0</td>
+      <td>1773.000000</td>
+      <td>1773.0</td>
+      <td>1773.00</td>
+      <td>0.974248</td>
+      <td>0.974248</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014300</td>
+      <td>0.014300</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>100016</td>
+      <td>4</td>
+      <td>106221.375000</td>
+      <td>232200.0</td>
+      <td>424885.500</td>
+      <td>8593.155000</td>
+      <td>14480.460</td>
+      <td>34372.620</td>
+      <td>120745.125000</td>
+      <td>290250.0</td>
+      <td>482980.500</td>
+      <td>15690.375000</td>
+      <td>58050.0</td>
+      <td>62761.50</td>
+      <td>120745.125000</td>
+      <td>290250.0</td>
+      <td>482980.500</td>
+      <td>0.000000</td>
+      <td>0.217818</td>
+      <td>0.081682</td>
+      <td>-2370</td>
+      <td>-1049</td>
+      <td>-1779.500000</td>
+      <td>17.000000</td>
+      <td>68.0</td>
+      <td>14523.750000</td>
+      <td>58050.0</td>
+      <td>58095.00</td>
+      <td>0.949761</td>
+      <td>1.099045</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>70.00</td>
+      <td>210.0</td>
+      <td>210.0</td>
+      <td>0.029580</td>
+      <td>0.033600</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>100017</td>
+      <td>2</td>
+      <td>175565.250000</td>
+      <td>198409.5</td>
+      <td>351130.500</td>
+      <td>14375.407500</td>
+      <td>16967.295</td>
+      <td>28750.815</td>
+      <td>176665.500000</td>
+      <td>195291.0</td>
+      <td>353331.000</td>
+      <td>19152.000000</td>
+      <td>22500.0</td>
+      <td>38304.00</td>
+      <td>176665.500000</td>
+      <td>195291.0</td>
+      <td>353331.000</td>
+      <td>0.102133</td>
+      <td>0.110926</td>
+      <td>0.106529</td>
+      <td>-2441</td>
+      <td>-612</td>
+      <td>-1526.500000</td>
+      <td>17.000000</td>
+      <td>34.0</td>
+      <td>1100.250000</td>
+      <td>5319.0</td>
+      <td>2200.50</td>
+      <td>0.991156</td>
+      <td>1.015968</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014412</td>
+      <td>0.017723</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>100018</td>
+      <td>4</td>
+      <td>285989.591250</td>
+      <td>536364.0</td>
+      <td>1143958.365</td>
+      <td>38669.703750</td>
+      <td>94906.035</td>
+      <td>154678.815</td>
+      <td>298363.466250</td>
+      <td>571774.5</td>
+      <td>1193453.865</td>
+      <td>14295.375000</td>
+      <td>57181.5</td>
+      <td>57181.50</td>
+      <td>298363.466250</td>
+      <td>571774.5</td>
+      <td>1193453.865</td>
+      <td>0.000000</td>
+      <td>0.108917</td>
+      <td>0.027229</td>
+      <td>-1648</td>
+      <td>-188</td>
+      <td>-755.250000</td>
+      <td>10.000000</td>
+      <td>40.0</td>
+      <td>12373.875000</td>
+      <td>57181.5</td>
+      <td>49495.50</td>
+      <td>1.014609</td>
+      <td>1.158442</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>-9.00</td>
+      <td>0.0</td>
+      <td>-18.0</td>
+      <td>0.018384</td>
+      <td>0.038257</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>100019</td>
+      <td>1</td>
+      <td>104683.500000</td>
+      <td>104683.5</td>
+      <td>104683.500</td>
+      <td>10518.615000</td>
+      <td>10518.615</td>
+      <td>10518.615</td>
+      <td>84136.500000</td>
+      <td>84136.5</td>
+      <td>84136.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>84136.500000</td>
+      <td>84136.5</td>
+      <td>84136.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-925</td>
+      <td>-925</td>
+      <td>-925.000000</td>
+      <td>12.000000</td>
+      <td>12.0</td>
+      <td>-20547.000000</td>
+      <td>-20547.0</td>
+      <td>-20547.00</td>
+      <td>1.244210</td>
+      <td>1.244210</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>150.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>0.017147</td>
+      <td>0.017147</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>100020</td>
+      <td>2</td>
+      <td>41706.000000</td>
+      <td>48325.5</td>
+      <td>83412.000</td>
+      <td>7254.517500</td>
+      <td>8779.770</td>
+      <td>14509.035</td>
+      <td>39206.250000</td>
+      <td>45900.0</td>
+      <td>78412.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>39206.250000</td>
+      <td>45900.0</td>
+      <td>78412.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-472</td>
+      <td>-243</td>
+      <td>-357.500000</td>
+      <td>7.000000</td>
+      <td>14.0</td>
+      <td>-2499.750000</td>
+      <td>-2425.5</td>
+      <td>-4999.50</td>
+      <td>1.066006</td>
+      <td>1.079170</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.026651</td>
+      <td>0.038290</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>20</th>
+      <td>100021</td>
+      <td>6</td>
+      <td>153615.750000</td>
+      <td>675000.0</td>
+      <td>921694.500</td>
+      <td>10686.165000</td>
+      <td>33750.000</td>
+      <td>64116.990</td>
+      <td>40961.250000</td>
+      <td>99189.0</td>
+      <td>245767.500</td>
+      <td>3770.100000</td>
+      <td>9922.5</td>
+      <td>18850.50</td>
+      <td>49153.500000</td>
+      <td>99189.0</td>
+      <td>245767.500</td>
+      <td>0.000000</td>
+      <td>0.433539</td>
+      <td>0.106606</td>
+      <td>-2811</td>
+      <td>-261</td>
+      <td>-943.833333</td>
+      <td>7.000000</td>
+      <td>42.0</td>
+      <td>-112654.500000</td>
+      <td>8928.0</td>
+      <td>-675927.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>90.00</td>
+      <td>180.0</td>
+      <td>270.0</td>
+      <td>-inf</td>
+      <td>0.034033</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>21</th>
+      <td>100022</td>
+      <td>1</td>
+      <td>103203.000000</td>
+      <td>103203.0</td>
+      <td>103203.000</td>
+      <td>6765.975000</td>
+      <td>6765.975</td>
+      <td>6765.975</td>
+      <td>89091.000000</td>
+      <td>89091.0</td>
+      <td>89091.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>89091.000000</td>
+      <td>89091.0</td>
+      <td>89091.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-239</td>
+      <td>-239</td>
+      <td>-239.000000</td>
+      <td>18.000000</td>
+      <td>18.0</td>
+      <td>-14112.000000</td>
+      <td>-14112.0</td>
+      <td>-14112.00</td>
+      <td>1.158400</td>
+      <td>1.158400</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>0.0</td>
+      <td>0.010004</td>
+      <td>0.010004</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>22</th>
+      <td>100023</td>
+      <td>4</td>
+      <td>113517.000000</td>
+      <td>239242.5</td>
+      <td>454068.000</td>
+      <td>8895.892500</td>
+      <td>16822.440</td>
+      <td>35583.570</td>
+      <td>98746.875000</td>
+      <td>180000.0</td>
+      <td>394987.500</td>
+      <td>8435.250000</td>
+      <td>9000.0</td>
+      <td>16870.50</td>
+      <td>98746.875000</td>
+      <td>180000.0</td>
+      <td>394987.500</td>
+      <td>0.095959</td>
+      <td>0.101380</td>
+      <td>0.098669</td>
+      <td>-2424</td>
+      <td>-262</td>
+      <td>-1215.750000</td>
+      <td>12.500000</td>
+      <td>50.0</td>
+      <td>-14770.125000</td>
+      <td>2025.0</td>
+      <td>-59080.50</td>
+      <td>1.080951</td>
+      <td>1.329125</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>240.00</td>
+      <td>600.0</td>
+      <td>720.0</td>
+      <td>-inf</td>
+      <td>0.028649</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>23</th>
+      <td>100025</td>
+      <td>8</td>
+      <td>295425.781875</td>
+      <td>1042560.0</td>
+      <td>2363406.255</td>
+      <td>27645.595714</td>
+      <td>55678.095</td>
+      <td>193519.170</td>
+      <td>259795.344375</td>
+      <td>900000.0</td>
+      <td>2078362.755</td>
+      <td>5845.500000</td>
+      <td>23382.0</td>
+      <td>23382.00</td>
+      <td>296908.965000</td>
+      <td>900000.0</td>
+      <td>2078362.755</td>
+      <td>0.000000</td>
+      <td>0.423065</td>
+      <td>0.105766</td>
+      <td>-2060</td>
+      <td>-7</td>
+      <td>-731.000000</td>
+      <td>13.714286</td>
+      <td>96.0</td>
+      <td>-35630.437500</td>
+      <td>21645.0</td>
+      <td>-285043.50</td>
+      <td>1.073930</td>
+      <td>1.269700</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>174.25</td>
+      <td>367.0</td>
+      <td>697.0</td>
+      <td>0.022884</td>
+      <td>0.027871</td>
+      <td>0.000000</td>
+      <td>0.875000</td>
+    </tr>
+    <tr>
+      <th>24</th>
+      <td>100026</td>
+      <td>3</td>
+      <td>292281.000000</td>
+      <td>744498.0</td>
+      <td>876843.000</td>
+      <td>33193.665000</td>
+      <td>42778.845</td>
+      <td>66387.330</td>
+      <td>269115.000000</td>
+      <td>675000.0</td>
+      <td>807345.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>403672.500000</td>
+      <td>675000.0</td>
+      <td>807345.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-1427</td>
+      <td>-152</td>
+      <td>-682.333333</td>
+      <td>21.000000</td>
+      <td>42.0</td>
+      <td>-23166.000000</td>
+      <td>0.0</td>
+      <td>-69498.00</td>
+      <td>1.051480</td>
+      <td>1.102960</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>510.00</td>
+      <td>1020.0</td>
+      <td>1020.0</td>
+      <td>0.020701</td>
+      <td>0.029682</td>
+      <td>0.000000</td>
+      <td>0.666667</td>
+    </tr>
+    <tr>
+      <th>25</th>
+      <td>100027</td>
+      <td>4</td>
+      <td>173795.625000</td>
+      <td>239850.0</td>
+      <td>695182.500</td>
+      <td>24067.755000</td>
+      <td>28077.570</td>
+      <td>72203.265</td>
+      <td>163621.125000</td>
+      <td>226984.5</td>
+      <td>654484.500</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>218161.500000</td>
+      <td>226984.5</td>
+      <td>654484.500</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-795</td>
+      <td>-181</td>
+      <td>-407.000000</td>
+      <td>11.333333</td>
+      <td>34.0</td>
+      <td>-10174.500000</td>
+      <td>0.0</td>
+      <td>-40698.00</td>
+      <td>1.062332</td>
+      <td>1.066000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.014849</td>
+      <td>0.017250</td>
+      <td>0.250000</td>
+      <td>0.500000</td>
+    </tr>
+    <tr>
+      <th>26</th>
+      <td>100028</td>
+      <td>5</td>
+      <td>92920.500000</td>
+      <td>225000.0</td>
+      <td>464602.500</td>
+      <td>8091.585000</td>
+      <td>11250.000</td>
+      <td>24274.755</td>
+      <td>49207.500000</td>
+      <td>130765.5</td>
+      <td>246037.500</td>
+      <td>3750.000000</td>
+      <td>11250.0</td>
+      <td>11250.00</td>
+      <td>82012.500000</td>
+      <td>130765.5</td>
+      <td>246037.500</td>
+      <td>0.000000</td>
+      <td>0.173124</td>
+      <td>0.057708</td>
+      <td>-1805</td>
+      <td>-531</td>
+      <td>-1124.200000</td>
+      <td>11.333333</td>
+      <td>34.0</td>
+      <td>-43713.000000</td>
+      <td>6435.0</td>
+      <td>-218565.00</td>
+      <td>inf</td>
+      <td>inf</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>75.00</td>
+      <td>150.0</td>
+      <td>150.0</td>
+      <td>-inf</td>
+      <td>0.017550</td>
+      <td>0.000000</td>
+      <td>0.600000</td>
+    </tr>
+    <tr>
+      <th>27</th>
+      <td>100029</td>
+      <td>1</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>22891.680000</td>
+      <td>22891.680</td>
+      <td>22891.680</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>126000.000000</td>
+      <td>126000.0</td>
+      <td>126000.000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>-324</td>
+      <td>-324</td>
+      <td>-324.000000</td>
+      <td>6.000000</td>
+      <td>6.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>60.00</td>
+      <td>60.0</td>
+      <td>60.0</td>
+      <td>0.015013</td>
+      <td>0.015013</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>28</th>
+      <td>100030</td>
+      <td>12</td>
+      <td>32534.643750</td>
+      <td>49734.0</td>
+      <td>390415.725</td>
+      <td>4731.041250</td>
+      <td>9035.685</td>
+      <td>37848.330</td>
+      <td>33497.268750</td>
+      <td>47241.0</td>
+      <td>401967.225</td>
+      <td>1262.625000</td>
+      <td>6714.0</td>
+      <td>15151.50</td>
+      <td>33497.268750</td>
+      <td>47241.0</td>
+      <td>401967.225</td>
+      <td>0.000000</td>
+      <td>0.210919</td>
+      <td>0.044804</td>
+      <td>-2856</td>
+      <td>-378</td>
+      <td>-1981.083333</td>
+      <td>8.625000</td>
+      <td>69.0</td>
+      <td>962.625000</td>
+      <td>5607.0</td>
+      <td>11551.50</td>
+      <td>0.965475</td>
+      <td>1.052772</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>60.00</td>
+      <td>90.0</td>
+      <td>120.0</td>
+      <td>0.017772</td>
+      <td>0.037233</td>
+      <td>0.833333</td>
+      <td>0.166667</td>
+    </tr>
+    <tr>
+      <th>29</th>
+      <td>100032</td>
+      <td>1</td>
+      <td>42255.000000</td>
+      <td>42255.0</td>
+      <td>42255.000</td>
+      <td>7910.145000</td>
+      <td>7910.145</td>
+      <td>7910.145</td>
+      <td>69255.000000</td>
+      <td>69255.0</td>
+      <td>69255.000</td>
+      <td>27000.000000</td>
+      <td>27000.0</td>
+      <td>27000.00</td>
+      <td>69255.000000</td>
+      <td>69255.0</td>
+      <td>69255.000</td>
+      <td>0.424597</td>
+      <td>0.424597</td>
+      <td>0.424597</td>
+      <td>-1497</td>
+      <td>-1497</td>
+      <td>-1497.000000</td>
+      <td>6.000000</td>
+      <td>6.0</td>
+      <td>27000.000000</td>
+      <td>27000.0</td>
+      <td>27000.00</td>
+      <td>0.610136</td>
+      <td>0.610136</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1.0</td>
+      <td>1.0</td>
+      <td>0.00</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.020534</td>
+      <td>0.020534</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="가공된-최종-데이터-세트-생성">
+<a class="anchor" href="#%EA%B0%80%EA%B3%B5%EB%90%9C-%EC%B5%9C%EC%A2%85-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8-%EC%83%9D%EC%84%B1" aria-hidden="true"><span class="octicon octicon-link"></span></a>가공된 최종 데이터 세트 생성<a class="anchor-link" href="#%EA%B0%80%EA%B3%B5%EB%90%9C-%EC%B5%9C%EC%A2%85-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8-%EC%83%9D%EC%84%B1"> </a>
+</h4>
+<h5 id="지금까지-과정을-함수화">
+<a class="anchor" href="#%EC%A7%80%EA%B8%88%EA%B9%8C%EC%A7%80-%EA%B3%BC%EC%A0%95%EC%9D%84-%ED%95%A8%EC%88%98%ED%99%94" aria-hidden="true"><span class="octicon octicon-link"></span></a>지금까지 과정을 함수화<a class="anchor-link" href="#%EC%A7%80%EA%B8%88%EA%B9%8C%EC%A7%80-%EA%B3%BC%EC%A0%95%EC%9D%84-%ED%95%A8%EC%88%98%ED%99%94"> </a>
+</h5>
+<h5 id="이전에-application-데이터-세트의-feature-engineering-수행-후-새롭게-previous-데이터-세트로-가공된-데이터를-조인.">
+<a class="anchor" href="#%EC%9D%B4%EC%A0%84%EC%97%90-application-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8%EC%9D%98-feature-engineering-%EC%88%98%ED%96%89-%ED%9B%84-%EC%83%88%EB%A1%AD%EA%B2%8C-previous-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8%EB%A1%9C-%EA%B0%80%EA%B3%B5%EB%90%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A1%B0%EC%9D%B8." aria-hidden="true"><span class="octicon octicon-link"></span></a>이전에 application 데이터 세트의 feature engineering 수행 후 새롭게 previous 데이터 세트로 가공된 데이터를 조인.<a class="anchor-link" href="#%EC%9D%B4%EC%A0%84%EC%97%90-application-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8%EC%9D%98-feature-engineering-%EC%88%98%ED%96%89-%ED%9B%84-%EC%83%88%EB%A1%AD%EA%B2%8C-previous-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EC%84%B8%ED%8A%B8%EB%A1%9C-%EA%B0%80%EA%B3%B5%EB%90%9C-%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC-%EC%A1%B0%EC%9D%B8."> </a>
+</h5>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">gc</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_rows'</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.max_columns'</span><span class="p">,</span> <span class="mi">200</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">get_dataset</span><span class="p">():</span>
+    <span class="n">app_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'application_train.csv'</span><span class="p">)</span>
+    <span class="n">app_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'application_test.csv'</span><span class="p">)</span>
+    <span class="n">apps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">app_train</span><span class="p">,</span> <span class="n">app_test</span><span class="p">])</span>
+    <span class="n">prev</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'previous_application.csv'</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">apps</span><span class="p">,</span> <span class="n">prev</span>
+
+<span class="n">apps</span><span class="p">,</span> <span class="n">prev</span> <span class="o">=</span> <span class="n">get_dataset</span><span class="p">()</span>
+    
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances
+<script src="https://utteranc.es/client.js"
+        repo="Gwonchankim/channee"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script> -->
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://channeeblogjupyter.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a class="u-url" href="/channee/jupyter/ml/machinelearning/2021/08/31/_09_01_Project2_3.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/channee/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/channee/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/channee/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/https%3A%2F%2Fgithub.com%2FGwonchankim" title="https://github.com/Gwonchankim"><svg class="svg-icon grey"><use xlink:href="/channee/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/channee/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
